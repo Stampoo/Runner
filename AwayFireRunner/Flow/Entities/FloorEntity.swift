@@ -18,7 +18,9 @@ final class FloorEntity: GKEntity {
     //MARK: - Initializers
 
     init(size: CGSize) {
-        node = SKSpriteNode(color: .blue, size: size)
+        let texture = SKTexture(imageNamed: "platform")
+        node = SKSpriteNode(texture: texture)
+        node.size = size
         body = SKPhysicsBody(rectangleOf: size)
         super.init()
         setupNode(with: size)
@@ -28,10 +30,20 @@ final class FloorEntity: GKEntity {
         fatalError("init(coder:) has not been implemented")
     }
 
-    //MARK: - Private properties
+    //MARK: - Public methods
+
+    func startInfinityLoop() {
+        node.position.x -= 1
+        print(node.position)
+        if node.position.x <= 0 {
+            node.position.x = node.size.width / 2
+        }
+
+    }
+
+    //MARK: - Private methods
 
     private func setupNode(with size: CGSize) {
-        //let screenSize = UIScreen.main.bounds.size
         let nodeComponent = NodeComponent(node: node)
         addComponent(nodeComponent)
         node.physicsBody = body
