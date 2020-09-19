@@ -23,7 +23,6 @@ final class EntityManager: NSObject {
         self.scene = scene
         super.init()
         setupNotification()
-        addGestureForJump()
     }
 
     //MARK: - Public methods
@@ -64,12 +63,6 @@ final class EntityManager: NSObject {
                 print("spawn")
             }
         })
-    }
-
-    private func addGestureForJump() {
-        let gesture = UITapGestureRecognizer(target: self, action: #selector(PlayerEntity.jump))
-        scene.view?.addGestureRecognizer(gesture)
-        scene.view?.isUserInteractionEnabled = true
     }
 
 }

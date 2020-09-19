@@ -24,6 +24,7 @@ final class FloorEntity: GKEntity {
         body = SKPhysicsBody(rectangleOf: size)
         super.init()
         setupNode(with: size)
+        setupBody()
     }
 
     required init?(coder: NSCoder) {
@@ -49,6 +50,12 @@ final class FloorEntity: GKEntity {
         node.physicsBody?.isDynamic = false
         node.position = .init(x: node.size.width / 2,
                               y: node.size.height / 2)
+    }
+
+    private func setupBody() {
+        body.isDynamic = false
+        body.categoryBitMask = CollisionBitMask.floorCategory
+        body.contactTestBitMask = CollisionBitMask.playerMask
     }
 
 }

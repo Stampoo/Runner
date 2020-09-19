@@ -12,4 +12,6 @@ struct Sizes {
     static let screenSize = UIScreen.main.bounds.size
     static let screenWidth = Sizes.screenSize.width
     static let sceenHeight = Sizes.screenSize.height
+    static let jumpStr = Sizes.sceenHeight * 0.06
+    static let speed: CGFloat = 2
 }

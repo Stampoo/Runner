@@ -25,15 +25,24 @@ final class GameScene: SKScene {
     private var player: PlayerEntity?
     private var spike: SpikeEntity?
     private var fire: BossEntity?
+    private let contactService = CollisionService()
+    private var platform: PlatformEntity?
 
     //MARK: - Lifecycle
     
     override func didMove(to view: SKView) {
         entityManager = EntityManager(scene: self)
+        view.isUserInteractionEnabled = true
+        physicsWorld.contactDelegate = self
         setupFloor()
         setupPlayer()
         setupSpike()
         setupFire()
+        setupPlatform()
+    }
+
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        player?.jump()
     }
 
     //MARK: - Private methods
@@ -58,9 +67,12 @@ final class GameScene: SKScene {
     private func setupFire() {
         fire = BossEntity(size: .init(width: Constants.spriteSide * 2.5,
                                       height: Constants.spriteSide * 2))
-        print(CGSize(width: Constants.spriteSide,
-                     height: Constants.spriteSide * 2))
         entityManager?.add(entity: fire)
+    }
+
+    private func setupPlatform() {
+        platform = PlatformEntity(size: Constants.spriteSize)
+        entityManager?.add(entity: platform)
     }
     
 }
@@ -72,8 +84,18 @@ extension GameScene {
 
     override func update(_ currentTime: TimeInterval) {
         floor?.startInfinityLoop()
+        platform?.setPosition()
         spike?.node.position.x -= 2
         entityManager?.spawnSpike()
+    }
+
+}
+
+
+extension GameScene: SKPhysicsContactDelegate {
+
+    func didBegin(_ contact: SKPhysicsContact) {
+        contactService.contactDetector(contact: contact)
     }
 
 }

@@ -22,6 +22,7 @@ final class SpikeEntity: GKEntity {
         body = SKPhysicsBody(rectangleOf: size)
         super.init()
         setupNode()
+        setupBody()
     }
 
     required init?(coder: NSCoder) {
@@ -35,15 +36,23 @@ final class SpikeEntity: GKEntity {
         let leftOffset = Sizes.screenSize.width + CGFloat.random(in: nodeSize...nodeSize + 20)
         let rightOffset = Sizes.screenSize.width * 2 - CGFloat.random(in: nodeSize...nodeSize + 20)
         let randomXPosition = CGFloat.random(in: leftOffset...rightOffset)
-        node.position = .init(x: randomXPosition, y: nodeSize / 2 + nodeSize)
+        node.position = .init(x: randomXPosition, y: nodeSize / 2 + Sizes.sceenHeight * 0.1)
     }
 
     //MARK: - Private methods
 
     private func setupNode() {
         node.physicsBody = body
+        node.name = "Spike"
         let nodeComponent = NodeComponent(node: node)
         addComponent(nodeComponent)
+    }
+
+    private func setupBody() {
+        body.isDynamic = false
+        body.categoryBitMask = CollisionBitMask.enemyCategory
+        body.contactTestBitMask = CollisionBitMask.playerMask
+        body.collisionBitMask = CollisionBitMask.floorCategory
     }
 
 }

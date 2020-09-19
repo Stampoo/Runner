@@ -22,6 +22,7 @@ final class PlayerEntity: GKEntity {
         body = SKPhysicsBody(rectangleOf: size)
         super.init()
         setupNode()
+        setupBody()
     }
 
     required init?(coder: NSCoder) {
@@ -30,19 +31,27 @@ final class PlayerEntity: GKEntity {
 
     //MARK: - Public methods
 
-    @objc func jump() {
-        body.applyForce(.init(dx: 0, dy: 30))
+    func jump() {
+        body.applyImpulse(.init(dx: 0, dy: Sizes.jumpStr))
     }
 
     //MARK: - Private methods
 
     private func setupNode() {
-        node.physicsBody = body
         let nodeComponent = NodeComponent(node: node)
         addComponent(nodeComponent)
         let screenSize = UIScreen.main.bounds.size
         node.position = .init(x: screenSize.width / 2, y: screenSize.height / 2)
-        node.isUserInteractionEnabled = true
+        node.name = "Player"
+        node.physicsBody = body
+    }
+
+    private func setupBody() {
+        body.allowsRotation = false
+        body.isDynamic = true
+        body.categoryBitMask = CollisionBitMask.playerMask
+        body.collisionBitMask = CollisionBitMask.floorCategory
+        body.contactTestBitMask = CollisionBitMask.enemyCategory
     }
 
 }
