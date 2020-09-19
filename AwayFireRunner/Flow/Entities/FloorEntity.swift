@@ -47,13 +47,14 @@ final class FloorEntity: GKEntity {
         let nodeComponent = NodeComponent(node: node)
         addComponent(nodeComponent)
         node.physicsBody = body
-        node.physicsBody?.isDynamic = false
         node.position = .init(x: node.size.width / 2,
                               y: node.size.height / 2)
     }
 
     private func setupBody() {
         body.isDynamic = false
+        body.restitution = 0
+        body.friction = 0
         body.categoryBitMask = CollisionBitMask.floorCategory
         body.contactTestBitMask = CollisionBitMask.playerMask
     }

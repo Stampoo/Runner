@@ -29,6 +29,7 @@
 		3440B85D25152582005C3287 /* PlatformEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3440B85C25152582005C3287 /* PlatformEntity.swift */; };
 		3440B85F25152590005C3287 /* BossEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3440B85E25152590005C3287 /* BossEntity.swift */; };
 		346363EB25166A3D00DC3B9D /* GKEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346363EA25166A3D00DC3B9D /* GKEntity.swift */; };
+		346363ED2516A19900DC3B9D /* PlatformService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346363EC2516A19900DC3B9D /* PlatformService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -56,6 +57,7 @@
 		3440B85C25152582005C3287 /* PlatformEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformEntity.swift; sourceTree = "<group>"; };
 		3440B85E25152590005C3287 /* BossEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossEntity.swift; sourceTree = "<group>"; };
 		346363EA25166A3D00DC3B9D /* GKEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKEntity.swift; sourceTree = "<group>"; };
+		346363EC2516A19900DC3B9D /* PlatformService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +192,7 @@
 			isa = PBXGroup;
 			children = (
 				342EEE3A25163FE4007DC4B9 /* CollisionService */,
+				346363EC2516A19900DC3B9D /* PlatformService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 				3427E5F0251376160031528D /* StartPointController.swift in Sources */,
 				3440B85D25152582005C3287 /* PlatformEntity.swift in Sources */,
 				3440B85F25152590005C3287 /* BossEntity.swift in Sources */,
+				346363ED2516A19900DC3B9D /* PlatformService.swift in Sources */,
 				3423A7A12514AAA600304551 /* NSObject.swift in Sources */,
 				346363EB25166A3D00DC3B9D /* GKEntity.swift in Sources */,
 				342EEE3925163F83007DC4B9 /* CollisionService.swift in Sources */,

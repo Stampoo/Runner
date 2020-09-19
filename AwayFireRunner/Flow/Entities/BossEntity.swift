@@ -39,14 +39,14 @@ final class BossEntity: GKEntity {
         node.run(action)
         node.name = "Boss"
         node.physicsBody = body
-        node.position = .init(x: node.size.width / 2, y: node.size.height + node.size.height / 2)
+        node.position = .init(x: node.size.width / 2, y: Sizes.sceenHeight * 0.1 + node.size.height / 2)
         let nodeComponent = NodeComponent(node: node)
         addComponent(nodeComponent)
     }
     
     private func setupBody() {
         body.angularVelocity = 0
-        body.isDynamic = true
+        body.isDynamic = false
         body.categoryBitMask = CollisionBitMask.enemyCategory
         body.collisionBitMask = CollisionBitMask.floorCategory
     }

@@ -18,7 +18,8 @@ final class SpikeEntity: GKEntity {
     //MARK: - Initializers
 
     init(size: CGSize) {
-        node = SKSpriteNode(color: .red, size: size)
+        node = SKSpriteNode(texture: .init(imageNamed: "Spikes"))
+        node.size = size
         body = SKPhysicsBody(rectangleOf: size)
         super.init()
         setupNode()

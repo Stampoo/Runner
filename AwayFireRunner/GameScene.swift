@@ -27,11 +27,13 @@ final class GameScene: SKScene {
     private var fire: BossEntity?
     private let contactService = CollisionService()
     private var platform: PlatformEntity?
+    private var platformGenerator: PlatformGenerateService?
 
     //MARK: - Lifecycle
     
     override func didMove(to view: SKView) {
         entityManager = EntityManager(scene: self)
+        platformGenerator = PlatformGenerateService(scene: self, blockSize: Constants.spriteSize)
         view.isUserInteractionEnabled = true
         physicsWorld.contactDelegate = self
         setupFloor()
@@ -96,6 +98,7 @@ extension GameScene: SKPhysicsContactDelegate {
 
     func didBegin(_ contact: SKPhysicsContact) {
         contactService.contactDetector(contact: contact)
+        platformGenerator?.generatePlatform()
     }
 
 }

@@ -18,11 +18,14 @@ final class PlayerEntity: GKEntity {
     //MARK: - Initializers
 
     init(size: CGSize) {
-        node = SKSpriteNode(color: .green, size: size)
-        body = SKPhysicsBody(rectangleOf: size)
+        node = SKSpriteNode(texture: .init(imageNamed: "PlayerRun0"))
+        node.size = size
+        body = SKPhysicsBody(rectangleOf: .init(width: node.size.width / 2,
+                                                height: node.size.height))
         super.init()
         setupNode()
         setupBody()
+        runPlayer()
     }
 
     required init?(coder: NSCoder) {
@@ -48,10 +51,18 @@ final class PlayerEntity: GKEntity {
 
     private func setupBody() {
         body.allowsRotation = false
+        body.mass = 0.08
+        body.restitution = 0
+        body.friction = 0
         body.isDynamic = true
         body.categoryBitMask = CollisionBitMask.playerMask
         body.collisionBitMask = CollisionBitMask.floorCategory
         body.contactTestBitMask = CollisionBitMask.enemyCategory
+    }
+
+    private func runPlayer() {
+        let textures = Array(0...5).map { SKTexture(imageNamed: "PlayerRun\($0)") }
+        node.run(.repeatForever(.animate(with: textures, timePerFrame: 0.2)))
     }
 
 }
