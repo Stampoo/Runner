@@ -24,6 +24,8 @@
 		3427E60825137DC60031528D /* NodeComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3427E60725137DC60031528D /* NodeComponent.swift */; };
 		3427E60A25137DCF0031528D /* BodyComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3427E60925137DCF0031528D /* BodyComponent.swift */; };
 		3427E60C25137FFC0031528D /* FloorEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3427E60B25137FFC0031528D /* FloorEntity.swift */; };
+		3440B85D25152582005C3287 /* PlatformEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3440B85C25152582005C3287 /* PlatformEntity.swift */; };
+		3440B85F25152590005C3287 /* BossEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3440B85E25152590005C3287 /* BossEntity.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +48,8 @@
 		3427E60725137DC60031528D /* NodeComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NodeComponent.swift; sourceTree = "<group>"; };
 		3427E60925137DCF0031528D /* BodyComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BodyComponent.swift; sourceTree = "<group>"; };
 		3427E60B25137FFC0031528D /* FloorEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorEntity.swift; sourceTree = "<group>"; };
+		3440B85C25152582005C3287 /* PlatformEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformEntity.swift; sourceTree = "<group>"; };
+		3440B85E25152590005C3287 /* BossEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossEntity.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -158,6 +162,8 @@
 			isa = PBXGroup;
 			children = (
 				3427E60B25137FFC0031528D /* FloorEntity.swift */,
+				3440B85C25152582005C3287 /* PlatformEntity.swift */,
+				3440B85E25152590005C3287 /* BossEntity.swift */,
 				3423A7A22514AC9F00304551 /* PlayerEntity.swift */,
 				3423A7A42514C65500304551 /* SpikeEntity.swift */,
 			);
@@ -251,6 +257,8 @@
 				3427E60C25137FFC0031528D /* FloorEntity.swift in Sources */,
 				3427E60A25137DCF0031528D /* BodyComponent.swift in Sources */,
 				3427E5F0251376160031528D /* StartPointController.swift in Sources */,
+				3440B85D25152582005C3287 /* PlatformEntity.swift in Sources */,
+				3440B85F25152590005C3287 /* BossEntity.swift in Sources */,
 				3423A7A12514AAA600304551 /* NSObject.swift in Sources */,
 				3423A7A32514AC9F00304551 /* PlayerEntity.swift in Sources */,
 				3427E5E8251376160031528D /* AppDelegate.swift in Sources */,

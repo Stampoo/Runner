@@ -35,13 +35,15 @@ final class SpikeEntity: GKEntity {
         let leftOffset = Sizes.screenSize.width + CGFloat.random(in: nodeSize...nodeSize + 20)
         let rightOffset = Sizes.screenSize.width * 2 - CGFloat.random(in: nodeSize...nodeSize + 20)
         let randomXPosition = CGFloat.random(in: leftOffset...rightOffset)
-        node.position = .init(x: randomXPosition, y: nodeSize / 2)
+        node.position = .init(x: randomXPosition, y: nodeSize / 2 + nodeSize)
     }
 
     //MARK: - Private methods
 
     private func setupNode() {
         node.physicsBody = body
+        let nodeComponent = NodeComponent(node: node)
+        addComponent(nodeComponent)
     }
 
 }

@@ -14,7 +14,7 @@ final class EntityManager: NSObject {
 
     private var entities = Set<GKEntity>()
     private let scene: SKScene
-    @objc dynamic private var spikeIsSpawned = false
+    @objc dynamic private var spikeIsSpawned = true
     private var observer: NSKeyValueObservation?
 
     //MARK: - Initializers
@@ -22,6 +22,8 @@ final class EntityManager: NSObject {
     init(scene: SKScene) {
         self.scene = scene
         super.init()
+        setupNotification()
+        addGestureForJump()
     }
 
     //MARK: - Public methods
@@ -29,27 +31,45 @@ final class EntityManager: NSObject {
     func add(entity: GKEntity?) {
         guard let entity = entity,
             let nodeComponent = entity.component(ofType: NodeComponent.self) else {
-            fatalError("node not found!")
+                fatalError("node not found!")
         }
         entities.insert(entity)
         scene.addChild(nodeComponent.node)
+    }
+
+    func entity<Element>(of type: Element.Type) -> Element? {
+        entities.filter { $0 as? Element != nil }.first as? Element
+    }
+
+    func spawnSpike() {
+        guard let spikeEntity = entity(of: SpikeEntity.self) else {
+            return
+        }
+        if spikeEntity.node.position.x < -spikeEntity.node.size.width {
+            spikeIsSpawned = true
+        }
+
     }
 
     //MARK: - Private methods
 
     private func setupNotification() {
         observer = observe(\.spikeIsSpawned, changeHandler: { [weak self] (manager, value) in
-            guard let value = value.newValue else {
-                return
-            }
-            if !value {
-                let entity = self?.entities.filter { $0 as? SpikeEntity != nil } as? Set<SpikeEntity>
-                entity?.first?.spawnNode()
-                self?.add(entity: entity?.first)
+            if manager.spikeIsSpawned {
+                let spikeEntity = self?.entity(of: SpikeEntity.self)
+                spikeEntity?.spawnNode()
+                spikeEntity?.node.removeFromParent()
+                self?.add(entity: spikeEntity)
                 self?.spikeIsSpawned = false
                 print("spawn")
             }
         })
+    }
+
+    private func addGestureForJump() {
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(PlayerEntity.jump))
+        scene.view?.addGestureRecognizer(gesture)
+        scene.view?.isUserInteractionEnabled = true
     }
 
 }

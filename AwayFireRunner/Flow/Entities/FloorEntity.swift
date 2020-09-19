@@ -33,8 +33,7 @@ final class FloorEntity: GKEntity {
     //MARK: - Public methods
 
     func startInfinityLoop() {
-        node.position.x -= 1
-        print(node.position)
+        node.position.x -= 3
         if node.position.x <= 0 {
             node.position.x = node.size.width / 2
         }

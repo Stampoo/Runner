@@ -14,6 +14,8 @@ final class GameScene: SKScene {
 
     private enum Constants {
         static let screenSize = UIScreen.main.bounds.size
+        static let spriteSide = Constants.screenSize.width * 0.1
+        static let spriteSize = CGSize(width: Constants.spriteSide, height: Constants.spriteSide)
     }
 
     //MARK: - Private properties
@@ -22,6 +24,7 @@ final class GameScene: SKScene {
     private var floor: FloorEntity?
     private var player: PlayerEntity?
     private var spike: SpikeEntity?
+    private var fire: BossEntity?
 
     //MARK: - Lifecycle
     
@@ -29,6 +32,8 @@ final class GameScene: SKScene {
         entityManager = EntityManager(scene: self)
         setupFloor()
         setupPlayer()
+        setupSpike()
+        setupFire()
     }
 
     //MARK: - Private methods
@@ -36,21 +41,26 @@ final class GameScene: SKScene {
     private func setupFloor() {
         floor = FloorEntity(size: .init(width: Constants.screenSize.width * 2,
                                         height: Constants.screenSize.height * 0.1))
-        unwrap(element: floor) { floor in
-            entityManager?.add(entity: floor)
-        }
+        entityManager?.add(entity: floor)
     }
 
     private func setupPlayer() {
-        let side = Constants.screenSize.width * 0.1
-        player = PlayerEntity(size: .init(width: side, height: side))
-        unwrap(element: player) { player in
-            entityManager?.add(entity: player)
-        }
+        player = PlayerEntity(size: Constants.spriteSize)
+        entityManager?.add(entity: player)
     }
 
     private func setupSpike() {
-        
+        spike = SpikeEntity(size: Constants.spriteSize)
+        entityManager?.add(entity: spike)
+        spike?.spawnNode()
+    }
+
+    private func setupFire() {
+        fire = BossEntity(size: .init(width: Constants.spriteSide * 2.5,
+                                      height: Constants.spriteSide * 2))
+        print(CGSize(width: Constants.spriteSide,
+                     height: Constants.spriteSide * 2))
+        entityManager?.add(entity: fire)
     }
     
 }
@@ -62,6 +72,8 @@ extension GameScene {
 
     override func update(_ currentTime: TimeInterval) {
         floor?.startInfinityLoop()
+        spike?.node.position.x -= 2
+        entityManager?.spawnSpike()
     }
 
 }

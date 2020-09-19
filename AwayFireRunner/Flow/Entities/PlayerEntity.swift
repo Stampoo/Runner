@@ -30,6 +30,10 @@ final class PlayerEntity: GKEntity {
 
     //MARK: - Public methods
 
+    @objc func jump() {
+        body.applyForce(.init(dx: 0, dy: 30))
+    }
+
     //MARK: - Private methods
 
     private func setupNode() {
@@ -38,6 +42,7 @@ final class PlayerEntity: GKEntity {
         addComponent(nodeComponent)
         let screenSize = UIScreen.main.bounds.size
         node.position = .init(x: screenSize.width / 2, y: screenSize.height / 2)
+        node.isUserInteractionEnabled = true
     }
 
 }
