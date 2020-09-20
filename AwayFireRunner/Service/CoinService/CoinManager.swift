@@ -37,9 +37,14 @@ final class CoinManager {
             return
         }
         let spawnHeight = platform.calculateAccumulatedFrame().size.height + platform.position.y
-        let coin = createCoin(.init(x: platform.position.x, y: spawnHeight), coinSize)
-        scene.addChild(coin)
-        coinsInGame.append(coin)
+        for index in 0...coinsNumber(on: platform) {
+            let index = CGFloat(index + 1)
+            let coinPosition = CGPoint(x: platform.position.x + coinSize.width * index, y: spawnHeight)
+            let coin = createCoin(coinPosition, coinSize)
+            scene.addChild(coin)
+            coinsInGame.append(coin)
+        }
+
     }
 
     func collectCoin(_ coin: SKNode) {
@@ -70,6 +75,11 @@ final class CoinManager {
         coin.position = position
         coin.size = size
         return coin
+    }
+
+    private func coinsNumber(on platform: SKNode?) -> Int {
+        let platfromParts = platform?.children.count ?? 0
+        return Array(0...platfromParts - 2).randomElement() ?? 0
     }
 
 }
