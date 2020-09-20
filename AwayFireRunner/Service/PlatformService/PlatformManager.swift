@@ -33,7 +33,9 @@ final class PlatformManager {
     //MARK: - Public methods
 
     func spawnPlatform() {
-        let oldPlatform = platforms.last ?? SKNode()
+        let altNode = SKNode()
+        altNode.position = .zero
+        let oldPlatform = platforms.last ?? altNode
         let length = platforms.last != nil ? randomLength() : 7
         let position = spawnService.calculate(oldPosition: oldPlatform.position,
                                               oldPlatformSize: oldPlatform.calculateAccumulatedFrame().size,
@@ -43,10 +45,20 @@ final class PlatformManager {
         platforms.append(platform)
     }
 
+    func removeUnusedPlatform(_ cameraPosition: CGPoint?) {
+        guard let position = cameraPosition else {
+            return
+        }
+        let bounds = position.x - UIScreen.main.bounds.width
+        let platformToremove = platforms.filter { $0.position.x < bounds }
+        platformToremove.forEach { $0.removeFromParent() }
+        platforms = platforms.filter { $0.position.x > bounds }
+    }
+
     //MARK: - Private methods
 
     private func randomLength() -> Int {
-        Array(2...7).randomElement() ?? 0
+        4//Array(2...7).randomElement() ?? 0
     }
 
     private func lengthToWidth(_ length: Int) -> CGFloat {

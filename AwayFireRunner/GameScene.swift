@@ -76,19 +76,20 @@ final class GameScene: SKScene {
 extension GameScene {
 
     override func update(_ currentTime: TimeInterval) {
-        player?.node.position.x += Sizes.speed
-        moviedCamera?.moveCamera(on: player?.node.position.x)
-        floor?.pin(to: player?.node.position.x ?? 0)
+        player?.startMove()
+        moviedCamera?.moveCamera(on: player?.getCurrentPos().x)
+        floor?.pin(to: player?.getCurrentPos().x ?? 0)
         platformGeneratorTrigger()
     }
 
     private func platformGeneratorTrigger() {
         guard let lastSpawnedPlatform = platformManager?.platforms.last,
-            let currentPosition = player?.node.position else {
+            let currentPosition = player?.getCurrentPos() else {
                 return
         }
         if currentPosition.x + Sizes.screenSize.midX > lastSpawnedPlatform.position.x  {
             platformManager?.spawnPlatform()
+            platformManager?.removeUnusedPlatform(currentPosition)
         }
     }
 

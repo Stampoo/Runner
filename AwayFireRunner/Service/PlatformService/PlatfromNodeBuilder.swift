@@ -35,7 +35,6 @@ final class PlatformNodeBuilder {
 
     private func createPlatform(length: Int, position: CGPoint) -> SKNode {
         let container = SKNode()
-        container.position = position
         for index in 1...length {
             switch index {
             case 1:
@@ -46,6 +45,7 @@ final class PlatformNodeBuilder {
                 createNode(with: middlePlatform, putTo: container, index: index)
             }
         }
+        container.position = position
         return container
     }
 
@@ -63,6 +63,7 @@ final class PlatformNodeBuilder {
         let center = CGPoint(x: nodeSize.width / 2 * CGFloat(length) - nodeSize.width / 2, y: 0)
         let body = SKPhysicsBody(rectangleOf: bodySize, center: center)
         body.isDynamic = false
+        body.restitution = 0
         node.physicsBody = body
     }
 

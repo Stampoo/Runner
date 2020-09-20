@@ -32,7 +32,6 @@
 		3440B85D25152582005C3287 /* PlatformEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3440B85C25152582005C3287 /* PlatformEntity.swift */; };
 		3440B85F25152590005C3287 /* BossEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3440B85E25152590005C3287 /* BossEntity.swift */; };
 		346363EB25166A3D00DC3B9D /* GKEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346363EA25166A3D00DC3B9D /* GKEntity.swift */; };
-		346363ED2516A19900DC3B9D /* PlatformService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346363EC2516A19900DC3B9D /* PlatformService.swift */; };
 		34DF666525178EE100E94FF4 /* SpawnPositionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF666425178EE100E94FF4 /* SpawnPositionCalculator.swift */; };
 		34DF666725178EF100E94FF4 /* PlatformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF666625178EF100E94FF4 /* PlatformManager.swift */; };
 		34DF66692517948900E94FF4 /* PlatfromNodeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF66682517948900E94FF4 /* PlatfromNodeBuilder.swift */; };
@@ -66,7 +65,6 @@
 		3440B85C25152582005C3287 /* PlatformEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformEntity.swift; sourceTree = "<group>"; };
 		3440B85E25152590005C3287 /* BossEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossEntity.swift; sourceTree = "<group>"; };
 		346363EA25166A3D00DC3B9D /* GKEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKEntity.swift; sourceTree = "<group>"; };
-		346363EC2516A19900DC3B9D /* PlatformService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformService.swift; sourceTree = "<group>"; };
 		34DF666425178EE100E94FF4 /* SpawnPositionCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnPositionCalculator.swift; sourceTree = "<group>"; };
 		34DF666625178EF100E94FF4 /* PlatformManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformManager.swift; sourceTree = "<group>"; };
 		34DF66682517948900E94FF4 /* PlatfromNodeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatfromNodeBuilder.swift; sourceTree = "<group>"; };
@@ -206,11 +204,9 @@
 		342EEE3725163F50007DC4B9 /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				343B7E872517CE4400C01A37 /* CoinService */,
+				343B7E862517CE2300C01A37 /* PlatformService */,
 				342EEE3A25163FE4007DC4B9 /* CollisionService */,
-				346363EC2516A19900DC3B9D /* PlatformService.swift */,
-				34DF666425178EE100E94FF4 /* SpawnPositionCalculator.swift */,
-				34DF666625178EF100E94FF4 /* PlatformManager.swift */,
-				34DF66682517948900E94FF4 /* PlatfromNodeBuilder.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -222,6 +218,23 @@
 				342EEE3B25163FF7007DC4B9 /* CollisionBitMask.swift */,
 			);
 			path = CollisionService;
+			sourceTree = "<group>";
+		};
+		343B7E862517CE2300C01A37 /* PlatformService */ = {
+			isa = PBXGroup;
+			children = (
+				34DF666425178EE100E94FF4 /* SpawnPositionCalculator.swift */,
+				34DF666625178EF100E94FF4 /* PlatformManager.swift */,
+				34DF66682517948900E94FF4 /* PlatfromNodeBuilder.swift */,
+			);
+			path = PlatformService;
+			sourceTree = "<group>";
+		};
+		343B7E872517CE4400C01A37 /* CoinService */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoinService;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -307,7 +320,6 @@
 				3440B85D25152582005C3287 /* PlatformEntity.swift in Sources */,
 				3440B85F25152590005C3287 /* BossEntity.swift in Sources */,
 				341C453A2517617F006AD06E /* CameraEntity.swift in Sources */,
-				346363ED2516A19900DC3B9D /* PlatformService.swift in Sources */,
 				3423A7A12514AAA600304551 /* NSObject.swift in Sources */,
 				346363EB25166A3D00DC3B9D /* GKEntity.swift in Sources */,
 				342EEE3925163F83007DC4B9 /* CollisionService.swift in Sources */,
