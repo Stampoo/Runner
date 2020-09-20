@@ -13,6 +13,7 @@ final class PlatformGenerateService {
     //MARK: - Constants
 
     private enum Constants {
+        static let screenSize = UIScreen.main.bounds.size
         static let screenHeight = UIScreen.main.bounds.size.height
         static let screenWidth = UIScreen.main.bounds.size.width
         static let maxHeight = Constants.screenHeight * 0.5
@@ -26,9 +27,13 @@ final class PlatformGenerateService {
     private let middlePlatform = SKTexture(imageNamed: "Platform")
     private let scene: SKScene
     private let blockSize: CGSize
-    private var maxPlatformLength = 7
-    private var minPlatformLength = 2
-    private var betweenRange = Constants.screenWidth * 0.1
+    private let maxPlatformLength = 7
+    private let minPlatformLength = 2
+    private var minRangeToBounds: CGFloat {
+        blockSize.height
+    }
+    private let betweenRange = Constants.screenWidth * 0.1
+    private var currentPlatforms = [SKNode]()
 
     //MARK: - Initializers
 
@@ -39,16 +44,29 @@ final class PlatformGenerateService {
 
     //MARK: - Public properties
 
-    func generatePlatform() {
-        createPlatform()
+    func generatePlatform(oldPlatform position: CGPoint) {
+        createPlatform(at: position)
+    }
+
+    func startPlatform() {
+    }
+
+    func removeNotActualPlatforms(with cameraPosition: CGPoint?) {
+        guard let position = cameraPosition else {
+            return
+        }
+        let bounds = position.x - Constants.screenSize.midX
+        let platformToremove = currentPlatforms.filter { $0.position.x < bounds }
+        platformToremove.forEach { $0.removeFromParent() }
+        currentPlatforms = currentPlatforms.filter { $0.position.x > bounds }
     }
 
     //MARK: - Private propertties
 
-    private func createPlatform() {
+    private func createPlatform(at position: CGPoint) {
         let commonNode = SKNode()
         let length = generatePlatformLength()
-        let position = generatePlatformPosition(with: .zero, at: 0, to: length)
+        let position = generatePlatformPosition(with: position, at: 0, to: length)
         for index in 0...length - 1 {
             if index == 0 {
                 createNode(with: leftPlatform, to: commonNode, at: index)
@@ -59,7 +77,9 @@ final class PlatformGenerateService {
             }
         }
         commonNode.position = position
+        createPlatformBody(for: commonNode, at: length)
         scene.addChild(commonNode)
+        currentPlatforms.append(commonNode)
     }
 
     private func createNode(with texture: SKTexture?, to node: SKNode?, at index: Int) {
@@ -67,11 +87,22 @@ final class PlatformGenerateService {
         let skNode = SKSpriteNode(texture: texture)
         skNode.size = blockSize
         skNode.position = .init(x: blockSize.width * cgIndex, y: node?.position.y ?? 0)
+        node?.physicsBody?.isDynamic = false
+        node?.physicsBody?.categoryBitMask = CollisionBitMask.floorCategory
         node?.addChild(skNode)
     }
 
     private func generatePlatformLength() -> Int {
         Int.random(in: minPlatformLength...maxPlatformLength)
+    }
+
+    private func createPlatformBody(for node: SKNode, at length: Int) {
+        let bodyLength = blockSize.width * CGFloat(length)
+        let bodySize = CGSize(width: bodyLength, height: blockSize.height)
+        let center = CGPoint(x: blockSize.width / 2 * CGFloat(length) - blockSize.width / 2, y: 0)
+        let body = SKPhysicsBody(rectangleOf: bodySize, center: center)
+        body.isDynamic = false
+        node.physicsBody = body
     }
 
     private func generatePlatformPosition(with currentPosition: CGPoint,
@@ -83,7 +114,20 @@ final class PlatformGenerateService {
             0
             ].map { $0 + currentPosition.y }
         let xPosition = currentPosition.x + calcLength(oldPlatformLength) / 2 + calcLength(newPlatformLength) / 2 + betweenRange
-        return .init(x: xPosition, y: possibleWaysY.randomElement() ?? 0)
+        let yPosition = possibleWaysY.randomElement() ?? 0
+        return boundsEvader(.init(x: xPosition, y: yPosition))
+    }
+
+    private func boundsEvader(_ position: CGPoint) -> CGPoint {
+        switch position.y {
+        case ..<(Constants.minHeight + minRangeToBounds):
+            return .init(x: position.x, y: position.y + Constants.screenHeight * 0.2)
+        case (Constants.maxHeight - minRangeToBounds)...Constants.maxHeight:
+            return .init(x: position.x, y: position.y - Constants.screenHeight * 0.2)
+        default:
+            break
+        }
+        return position
     }
 
     private func calcLength(_ count: Int) -> CGFloat {

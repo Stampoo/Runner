@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		341A40832513AFA40074C3CC /* EntityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341A40822513AFA40074C3CC /* EntityManager.swift */; };
+		341C453625175240006AD06E /* Int.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C453525175240006AD06E /* Int.swift */; };
+		341C45382517612A006AD06E /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C45372517612A006AD06E /* CGSize.swift */; };
+		341C453A2517617F006AD06E /* CameraEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C45392517617F006AD06E /* CameraEntity.swift */; };
 		3423A7A12514AAA600304551 /* NSObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3423A7A02514AAA600304551 /* NSObject.swift */; };
 		3423A7A32514AC9F00304551 /* PlayerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3423A7A22514AC9F00304551 /* PlayerEntity.swift */; };
 		3423A7A52514C65500304551 /* SpikeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3423A7A42514C65500304551 /* SpikeEntity.swift */; };
@@ -34,6 +37,9 @@
 
 /* Begin PBXFileReference section */
 		341A40822513AFA40074C3CC /* EntityManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntityManager.swift; sourceTree = "<group>"; };
+		341C453525175240006AD06E /* Int.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Int.swift; sourceTree = "<group>"; };
+		341C45372517612A006AD06E /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
+		341C45392517617F006AD06E /* CameraEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraEntity.swift; sourceTree = "<group>"; };
 		3423A7A02514AAA600304551 /* NSObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObject.swift; sourceTree = "<group>"; };
 		3423A7A22514AC9F00304551 /* PlayerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerEntity.swift; sourceTree = "<group>"; };
 		3423A7A42514C65500304551 /* SpikeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpikeEntity.swift; sourceTree = "<group>"; };
@@ -85,6 +91,8 @@
 			children = (
 				3423A7A02514AAA600304551 /* NSObject.swift */,
 				346363EA25166A3D00DC3B9D /* GKEntity.swift */,
+				341C453525175240006AD06E /* Int.swift */,
+				341C45372517612A006AD06E /* CGSize.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -176,6 +184,7 @@
 				3440B85E25152590005C3287 /* BossEntity.swift */,
 				3423A7A22514AC9F00304551 /* PlayerEntity.swift */,
 				3423A7A42514C65500304551 /* SpikeEntity.swift */,
+				341C45392517617F006AD06E /* CameraEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -287,15 +296,18 @@
 				3427E5F0251376160031528D /* StartPointController.swift in Sources */,
 				3440B85D25152582005C3287 /* PlatformEntity.swift in Sources */,
 				3440B85F25152590005C3287 /* BossEntity.swift in Sources */,
+				341C453A2517617F006AD06E /* CameraEntity.swift in Sources */,
 				346363ED2516A19900DC3B9D /* PlatformService.swift in Sources */,
 				3423A7A12514AAA600304551 /* NSObject.swift in Sources */,
 				346363EB25166A3D00DC3B9D /* GKEntity.swift in Sources */,
 				342EEE3925163F83007DC4B9 /* CollisionService.swift in Sources */,
 				342EEE3C25163FF7007DC4B9 /* CollisionBitMask.swift in Sources */,
 				3423A7A32514AC9F00304551 /* PlayerEntity.swift in Sources */,
+				341C453625175240006AD06E /* Int.swift in Sources */,
 				3427E5E8251376160031528D /* AppDelegate.swift in Sources */,
 				3427E60825137DC60031528D /* NodeComponent.swift in Sources */,
 				3423A7A82514C82F00304551 /* Sizes.swift in Sources */,
+				341C45382517612A006AD06E /* CGSize.swift in Sources */,
 				3423A7A52514C65500304551 /* SpikeEntity.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -27,6 +27,7 @@ final class GameScene: SKScene {
     private var fire: BossEntity?
     private let contactService = CollisionService()
     private var platform: PlatformEntity?
+    private var moviedCamera: CameraEntity?
     private var platformGenerator: PlatformGenerateService?
 
     //MARK: - Lifecycle
@@ -34,13 +35,10 @@ final class GameScene: SKScene {
     override func didMove(to view: SKView) {
         entityManager = EntityManager(scene: self)
         platformGenerator = PlatformGenerateService(scene: self, blockSize: Constants.spriteSize)
-        view.isUserInteractionEnabled = true
         physicsWorld.contactDelegate = self
         setupFloor()
         setupPlayer()
-        setupSpike()
-        setupFire()
-        setupPlatform()
+        setupCamera()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -50,7 +48,7 @@ final class GameScene: SKScene {
     //MARK: - Private methods
 
     private func setupFloor() {
-        floor = FloorEntity(size: .init(width: Constants.screenSize.width * 2,
+        floor = FloorEntity(size: .init(width: Constants.screenSize.width,
                                         height: Constants.screenSize.height * 0.1))
         entityManager?.add(entity: floor)
     }
@@ -60,21 +58,10 @@ final class GameScene: SKScene {
         entityManager?.add(entity: player)
     }
 
-    private func setupSpike() {
-        spike = SpikeEntity(size: Constants.spriteSize)
-        entityManager?.add(entity: spike)
-        spike?.spawnNode()
-    }
-
-    private func setupFire() {
-        fire = BossEntity(size: .init(width: Constants.spriteSide * 2.5,
-                                      height: Constants.spriteSide * 2))
-        entityManager?.add(entity: fire)
-    }
-
-    private func setupPlatform() {
-        platform = PlatformEntity(size: Constants.spriteSize)
-        entityManager?.add(entity: platform)
+    private func setupCamera() {
+        moviedCamera = CameraEntity(position: Constants.screenSize.center)
+        entityManager?.add(entity: moviedCamera)
+        camera = moviedCamera?.node
     }
     
 }
@@ -85,10 +72,21 @@ final class GameScene: SKScene {
 extension GameScene {
 
     override func update(_ currentTime: TimeInterval) {
-        floor?.startInfinityLoop()
-        platform?.setPosition()
-        spike?.node.position.x -= 2
-        entityManager?.spawnSpike()
+        player?.node.position.x += 1
+        moviedCamera?.moveCamera(on: player?.node.position.x)
+        guard let floor = floor?.node,
+        let movedCamera = camera else {
+            return
+        }
+        if floor.position.x <= movedCamera.position.x - Constants.screenSize.midX {
+            guard let playerPos = player?.node.position else {
+                return
+            }
+            let newPosition = CGPoint(x: playerPos.x, y: playerPos.y)
+            platformGenerator?.generatePlatform(oldPlatform: newPosition)
+            floor.position.x = playerPos.x
+            platformGenerator?.removeNotActualPlatforms(with: playerPos)
+        }
     }
 
 }
@@ -97,8 +95,6 @@ extension GameScene {
 extension GameScene: SKPhysicsContactDelegate {
 
     func didBegin(_ contact: SKPhysicsContact) {
-        contactService.contactDetector(contact: contact)
-        platformGenerator?.generatePlatform()
     }
 
 }
