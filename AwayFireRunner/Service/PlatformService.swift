@@ -22,7 +22,7 @@ final class PlatformGenerateService {
     //MARK: - Priavte properties
 
     private let leftPlatform = SKTexture(imageNamed: "PlatformLeft")
-    private let rightPlatform = SKTexture(imageNamed: "PlatfromRight")
+    private let rightPlatform = SKTexture(imageNamed: "PlatformRight")
     private let middlePlatform = SKTexture(imageNamed: "Platform")
     private let scene: SKScene
     private let blockSize: CGSize
@@ -66,7 +66,7 @@ final class PlatformGenerateService {
         let cgIndex = CGFloat(index)
         let skNode = SKSpriteNode(texture: texture)
         skNode.size = blockSize
-        skNode.position = .init(x: blockSize.width * cgIndex, y: blockSize.width * cgIndex)
+        skNode.position = .init(x: blockSize.width * cgIndex, y: node?.position.y ?? 0)
         node?.addChild(skNode)
     }
 
