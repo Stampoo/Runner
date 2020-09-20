@@ -28,17 +28,21 @@ final class GameScene: SKScene {
     private let contactService = CollisionService()
     private var platform: PlatformEntity?
     private var moviedCamera: CameraEntity?
-    private var platformGenerator: PlatformGenerateService?
+    private var platformGenerator: PlatformService?
+    private var platformManager: PlatformManager?
+    private var playerPosBeforeGenerate: CGFloat = 0
 
     //MARK: - Lifecycle
     
     override func didMove(to view: SKView) {
         entityManager = EntityManager(scene: self)
-        platformGenerator = PlatformGenerateService(scene: self, blockSize: Constants.spriteSize)
+        platformGenerator = PlatformService(scene: self, blockSize: Constants.spriteSize)
+        platformManager = PlatformManager(scene: self)
         physicsWorld.contactDelegate = self
         setupFloor()
         setupPlayer()
         setupCamera()
+        platformManager?.spawnPlatform()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -49,7 +53,7 @@ final class GameScene: SKScene {
 
     private func setupFloor() {
         floor = FloorEntity(size: .init(width: Constants.screenSize.width,
-                                        height: Constants.screenSize.height * 0.1))
+                                        height: 1))
         entityManager?.add(entity: floor)
     }
 
@@ -72,20 +76,19 @@ final class GameScene: SKScene {
 extension GameScene {
 
     override func update(_ currentTime: TimeInterval) {
-        player?.node.position.x += 1
+        player?.node.position.x += Sizes.speed
         moviedCamera?.moveCamera(on: player?.node.position.x)
-        guard let floor = floor?.node,
-        let movedCamera = camera else {
-            return
-        }
-        if floor.position.x <= movedCamera.position.x - Constants.screenSize.midX {
-            guard let playerPos = player?.node.position else {
+        floor?.pin(to: player?.node.position.x ?? 0)
+        platformGeneratorTrigger()
+    }
+
+    private func platformGeneratorTrigger() {
+        guard let lastSpawnedPlatform = platformManager?.platforms.last,
+            let currentPosition = player?.node.position else {
                 return
-            }
-            let newPosition = CGPoint(x: playerPos.x, y: playerPos.y)
-            platformGenerator?.generatePlatform(oldPlatform: newPosition)
-            floor.position.x = playerPos.x
-            platformGenerator?.removeNotActualPlatforms(with: playerPos)
+        }
+        if currentPosition.x + Sizes.screenSize.midX > lastSpawnedPlatform.position.x  {
+            platformManager?.spawnPlatform()
         }
     }
 

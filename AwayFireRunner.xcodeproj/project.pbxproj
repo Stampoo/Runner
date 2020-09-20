@@ -33,6 +33,9 @@
 		3440B85F25152590005C3287 /* BossEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3440B85E25152590005C3287 /* BossEntity.swift */; };
 		346363EB25166A3D00DC3B9D /* GKEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346363EA25166A3D00DC3B9D /* GKEntity.swift */; };
 		346363ED2516A19900DC3B9D /* PlatformService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346363EC2516A19900DC3B9D /* PlatformService.swift */; };
+		34DF666525178EE100E94FF4 /* SpawnPositionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF666425178EE100E94FF4 /* SpawnPositionCalculator.swift */; };
+		34DF666725178EF100E94FF4 /* PlatformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF666625178EF100E94FF4 /* PlatformManager.swift */; };
+		34DF66692517948900E94FF4 /* PlatfromNodeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF66682517948900E94FF4 /* PlatfromNodeBuilder.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		3440B85E25152590005C3287 /* BossEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossEntity.swift; sourceTree = "<group>"; };
 		346363EA25166A3D00DC3B9D /* GKEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKEntity.swift; sourceTree = "<group>"; };
 		346363EC2516A19900DC3B9D /* PlatformService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformService.swift; sourceTree = "<group>"; };
+		34DF666425178EE100E94FF4 /* SpawnPositionCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnPositionCalculator.swift; sourceTree = "<group>"; };
+		34DF666625178EF100E94FF4 /* PlatformManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformManager.swift; sourceTree = "<group>"; };
+		34DF66682517948900E94FF4 /* PlatfromNodeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatfromNodeBuilder.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -202,6 +208,9 @@
 			children = (
 				342EEE3A25163FE4007DC4B9 /* CollisionService */,
 				346363EC2516A19900DC3B9D /* PlatformService.swift */,
+				34DF666425178EE100E94FF4 /* SpawnPositionCalculator.swift */,
+				34DF666625178EF100E94FF4 /* PlatformManager.swift */,
+				34DF66682517948900E94FF4 /* PlatfromNodeBuilder.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -289,6 +298,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34DF666725178EF100E94FF4 /* PlatformManager.swift in Sources */,
 				3427E5EE251376160031528D /* GameScene.swift in Sources */,
 				341A40832513AFA40074C3CC /* EntityManager.swift in Sources */,
 				3427E60C25137FFC0031528D /* FloorEntity.swift in Sources */,
@@ -303,12 +313,14 @@
 				342EEE3925163F83007DC4B9 /* CollisionService.swift in Sources */,
 				342EEE3C25163FF7007DC4B9 /* CollisionBitMask.swift in Sources */,
 				3423A7A32514AC9F00304551 /* PlayerEntity.swift in Sources */,
+				34DF666525178EE100E94FF4 /* SpawnPositionCalculator.swift in Sources */,
 				341C453625175240006AD06E /* Int.swift in Sources */,
 				3427E5E8251376160031528D /* AppDelegate.swift in Sources */,
 				3427E60825137DC60031528D /* NodeComponent.swift in Sources */,
 				3423A7A82514C82F00304551 /* Sizes.swift in Sources */,
 				341C45382517612A006AD06E /* CGSize.swift in Sources */,
 				3423A7A52514C65500304551 /* SpikeEntity.swift in Sources */,
+				34DF66692517948900E94FF4 /* PlatfromNodeBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

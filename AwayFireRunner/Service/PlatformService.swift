@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-final class PlatformGenerateService {
+final class PlatformService {
 
     //MARK: - Constants
 
@@ -33,7 +33,8 @@ final class PlatformGenerateService {
         blockSize.height
     }
     private let betweenRange = Constants.screenWidth * 0.1
-    private var currentPlatforms = [SKNode]()
+    private(set) var currentPlatforms = [SKNode]()
+    private var startPlatform = SKNode()
 
     //MARK: - Initializers
 
@@ -44,18 +45,24 @@ final class PlatformGenerateService {
 
     //MARK: - Public properties
 
-    func generatePlatform(oldPlatform position: CGPoint) {
-        createPlatform(at: position)
+    func setupStartPlatform() {
+        let platformLength = Int(Constants.screenWidth / blockSize.width)
+        startPlatform = createPlatform(at: .zero, length: platformLength, oldPlatformLength: 0)
     }
 
-    func startPlatform() {
+    func generatePlatform(camera position: CGPoint) {
+        let length = generatePlatformLength()
+        let oldLength = currentPlatforms.last?.children.count ?? 0
+        _ = createPlatform(at: currentPlatforms.last?.position ?? .zero,
+                           length: length, oldPlatformLength: oldLength - 1)
+        removeNotActualPlatforms(with: position)
     }
 
     func removeNotActualPlatforms(with cameraPosition: CGPoint?) {
         guard let position = cameraPosition else {
             return
         }
-        let bounds = position.x - Constants.screenSize.midX
+        let bounds = position.x - Constants.screenSize.width
         let platformToremove = currentPlatforms.filter { $0.position.x < bounds }
         platformToremove.forEach { $0.removeFromParent() }
         currentPlatforms = currentPlatforms.filter { $0.position.x > bounds }
@@ -63,10 +70,9 @@ final class PlatformGenerateService {
 
     //MARK: - Private propertties
 
-    private func createPlatform(at position: CGPoint) {
+    private func createPlatform(at position: CGPoint, length: Int, oldPlatformLength: Int) -> SKNode {
         let commonNode = SKNode()
-        let length = generatePlatformLength()
-        let position = generatePlatformPosition(with: position, at: 0, to: length)
+        let position = generatePlatformPosition(with: position, at: oldPlatformLength, to: length)
         for index in 0...length - 1 {
             if index == 0 {
                 createNode(with: leftPlatform, to: commonNode, at: index)
@@ -80,6 +86,7 @@ final class PlatformGenerateService {
         createPlatformBody(for: commonNode, at: length)
         scene.addChild(commonNode)
         currentPlatforms.append(commonNode)
+        return commonNode
     }
 
     private func createNode(with texture: SKTexture?, to node: SKNode?, at index: Int) {
@@ -109,11 +116,12 @@ final class PlatformGenerateService {
                                           at oldPlatformLength: Int,
                                           to newPlatformLength: Int) -> CGPoint {
         let possibleWaysY = [
-            -Constants.screenHeight * 0.1,
-            Constants.screenHeight * 0.1,
+            -Constants.screenWidth * 0.1,
+            Constants.screenWidth * 0.1,
             0
             ].map { $0 + currentPosition.y }
-        let xPosition = currentPosition.x + calcLength(oldPlatformLength) / 2 + calcLength(newPlatformLength) / 2 + betweenRange
+        let currentPlatform = currentPlatforms.last?.calculateAccumulatedFrame().size ?? .zero
+        let xPosition = currentPosition.x + currentPlatform.width / 2 + calcLength(newPlatformLength) / 2 + betweenRange
         let yPosition = possibleWaysY.randomElement() ?? 0
         return boundsEvader(.init(x: xPosition, y: yPosition))
     }
