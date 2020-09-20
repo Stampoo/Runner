@@ -36,11 +36,10 @@ final class CoinManager {
         guard let platform = platform else {
             return
         }
-        let coin = SKSpriteNode(imageNamed: "Coin0")
-        scene.addChild(coin)
         let spawnHeight = platform.calculateAccumulatedFrame().size.height + platform.position.y
-        coin.size = coinSize
-        coin.position = .init(x: platform.position.x, y: spawnHeight)
+        let coin = createCoin(.init(x: platform.position.x, y: spawnHeight), coinSize)
+        scene.addChild(coin)
+        coinsInGame.append(coin)
     }
 
     func collectCoin(_ coin: SKNode) {
@@ -48,10 +47,29 @@ final class CoinManager {
         removeFromScene(coin)
     }
 
+    func removeUnusedCoin(at cameraPosition: CGPoint?) {
+        guard let camPos = cameraPosition else {
+            return
+        }
+        let unusedCoins = coinsInGame.filter { $0.position.x < camPos.x - UIScreen.main.bounds.size.width }
+        unusedCoins.forEach { $0.removeFromParent() }
+        coinsInGame = coinsInGame.filter { $0.position.x > camPos.x - UIScreen.main.bounds.size.width }
+    }
+
     //MARK: - Private methods
 
     private func removeFromScene(_ coin: SKNode) {
         coin.removeFromParent()
+    }
+
+    private func createCoin(_ position: CGPoint, _ size: CGSize) -> SKSpriteNode {
+        let coinTextures = Array(0...3).map { SKTexture(imageNamed: "Coin\($0)") }
+        let action = SKAction.repeatForever(.animate(with: coinTextures, timePerFrame: 0.2))
+        let coin = SKSpriteNode(texture: coinTextures.first)
+        coin.run(action)
+        coin.position = position
+        coin.size = size
+        return coin
     }
 
 }

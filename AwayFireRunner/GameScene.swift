@@ -90,6 +90,7 @@ extension GameScene {
         if currentPosition.x + Sizes.screenSize.midX > lastSpawnedPlatform.position.x  {
             platformManager?.spawnPlatform()
             coinManager?.spawnCoins(on: platformManager?.platforms.last)
+            coinManager?.removeUnusedCoin(at: currentPosition)
             platformManager?.removeUnusedPlatform(currentPosition)
         }
     }
