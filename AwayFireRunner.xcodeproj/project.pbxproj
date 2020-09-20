@@ -15,6 +15,7 @@
 		3423A7A32514AC9F00304551 /* PlayerEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3423A7A22514AC9F00304551 /* PlayerEntity.swift */; };
 		3423A7A52514C65500304551 /* SpikeEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3423A7A42514C65500304551 /* SpikeEntity.swift */; };
 		3423A7A82514C82F00304551 /* Sizes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3423A7A72514C82F00304551 /* Sizes.swift */; };
+		342506702517E111005D868A /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3425066F2517E111005D868A /* Operators.swift */; };
 		3427E5E8251376160031528D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3427E5E7251376160031528D /* AppDelegate.swift */; };
 		3427E5EA251376160031528D /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3427E5E9251376160031528D /* GameScene.sks */; };
 		3427E5EC251376160031528D /* Actions.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3427E5EB251376160031528D /* Actions.sks */; };
@@ -29,6 +30,7 @@
 		3427E60C25137FFC0031528D /* FloorEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3427E60B25137FFC0031528D /* FloorEntity.swift */; };
 		342EEE3925163F83007DC4B9 /* CollisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EEE3825163F83007DC4B9 /* CollisionService.swift */; };
 		342EEE3C25163FF7007DC4B9 /* CollisionBitMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EEE3B25163FF7007DC4B9 /* CollisionBitMask.swift */; };
+		343B7E892517D68D00C01A37 /* CoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343B7E882517D68D00C01A37 /* CoinManager.swift */; };
 		3440B85D25152582005C3287 /* PlatformEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3440B85C25152582005C3287 /* PlatformEntity.swift */; };
 		3440B85F25152590005C3287 /* BossEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3440B85E25152590005C3287 /* BossEntity.swift */; };
 		346363EB25166A3D00DC3B9D /* GKEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346363EA25166A3D00DC3B9D /* GKEntity.swift */; };
@@ -46,6 +48,7 @@
 		3423A7A22514AC9F00304551 /* PlayerEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerEntity.swift; sourceTree = "<group>"; };
 		3423A7A42514C65500304551 /* SpikeEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpikeEntity.swift; sourceTree = "<group>"; };
 		3423A7A72514C82F00304551 /* Sizes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sizes.swift; sourceTree = "<group>"; };
+		3425066F2517E111005D868A /* Operators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Operators.swift; sourceTree = "<group>"; };
 		3427E5E4251376160031528D /* AwayFireRunner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AwayFireRunner.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3427E5E7251376160031528D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3427E5E9251376160031528D /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -62,6 +65,7 @@
 		3427E60B25137FFC0031528D /* FloorEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloorEntity.swift; sourceTree = "<group>"; };
 		342EEE3825163F83007DC4B9 /* CollisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionService.swift; sourceTree = "<group>"; };
 		342EEE3B25163FF7007DC4B9 /* CollisionBitMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionBitMask.swift; sourceTree = "<group>"; };
+		343B7E882517D68D00C01A37 /* CoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManager.swift; sourceTree = "<group>"; };
 		3440B85C25152582005C3287 /* PlatformEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformEntity.swift; sourceTree = "<group>"; };
 		3440B85E25152590005C3287 /* BossEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossEntity.swift; sourceTree = "<group>"; };
 		346363EA25166A3D00DC3B9D /* GKEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKEntity.swift; sourceTree = "<group>"; };
@@ -105,6 +109,7 @@
 			isa = PBXGroup;
 			children = (
 				3423A7A72514C82F00304551 /* Sizes.swift */,
+				3425066F2517E111005D868A /* Operators.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -233,6 +238,7 @@
 		343B7E872517CE4400C01A37 /* CoinService */ = {
 			isa = PBXGroup;
 			children = (
+				343B7E882517D68D00C01A37 /* CoinManager.swift */,
 			);
 			path = CoinService;
 			sourceTree = "<group>";
@@ -311,6 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				343B7E892517D68D00C01A37 /* CoinManager.swift in Sources */,
 				34DF666725178EF100E94FF4 /* PlatformManager.swift in Sources */,
 				3427E5EE251376160031528D /* GameScene.swift in Sources */,
 				341A40832513AFA40074C3CC /* EntityManager.swift in Sources */,
@@ -327,6 +334,7 @@
 				3423A7A32514AC9F00304551 /* PlayerEntity.swift in Sources */,
 				34DF666525178EE100E94FF4 /* SpawnPositionCalculator.swift in Sources */,
 				341C453625175240006AD06E /* Int.swift in Sources */,
+				342506702517E111005D868A /* Operators.swift in Sources */,
 				3427E5E8251376160031528D /* AppDelegate.swift in Sources */,
 				3427E60825137DC60031528D /* NodeComponent.swift in Sources */,
 				3423A7A82514C82F00304551 /* Sizes.swift in Sources */,

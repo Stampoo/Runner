@@ -22,7 +22,7 @@ final class SpawnPositionCalculator {
     func calculate(oldPosition: CGPoint,
                            oldPlatformSize: CGSize,
                            newPlatformWidth: CGFloat) -> CGPoint {
-        let newX = oldPosition.x + (oldPlatformSize.width / 2) + newPlatformWidth / 2 + betweenRange
+        let newX = oldPosition.x + oldPlatformSize.width + betweenRange
         let newY = calculateRandomY(from: oldPosition)
         return .init(x: newX, y: newY)
     }

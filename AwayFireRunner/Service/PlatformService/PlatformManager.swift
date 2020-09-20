@@ -58,7 +58,7 @@ final class PlatformManager {
     //MARK: - Private methods
 
     private func randomLength() -> Int {
-        4//Array(2...7).randomElement() ?? 0
+        Array(2...7).randomElement() ?? 0
     }
 
     private func lengthToWidth(_ length: Int) -> CGFloat {

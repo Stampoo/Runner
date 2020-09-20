@@ -28,16 +28,16 @@ final class GameScene: SKScene {
     private let contactService = CollisionService()
     private var platform: PlatformEntity?
     private var moviedCamera: CameraEntity?
-    private var platformGenerator: PlatformService?
     private var platformManager: PlatformManager?
+    private var coinManager: CoinManager?
     private var playerPosBeforeGenerate: CGFloat = 0
 
     //MARK: - Lifecycle
     
     override func didMove(to view: SKView) {
         entityManager = EntityManager(scene: self)
-        platformGenerator = PlatformService(scene: self, blockSize: Constants.spriteSize)
         platformManager = PlatformManager(scene: self)
+        coinManager = CoinManager(blockSize: Constants.spriteSize, scene: self)
         physicsWorld.contactDelegate = self
         setupFloor()
         setupPlayer()
@@ -89,6 +89,7 @@ extension GameScene {
         }
         if currentPosition.x + Sizes.screenSize.midX > lastSpawnedPlatform.position.x  {
             platformManager?.spawnPlatform()
+            coinManager?.spawnCoins(on: platformManager?.platforms.last)
             platformManager?.removeUnusedPlatform(currentPosition)
         }
     }
