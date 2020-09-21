@@ -19,22 +19,25 @@ final class GameScene: SKScene {
     }
 
     //MARK: - Private properties
-    
-    private var entityManager: EntityManager?
+
     private var floor: FloorEntity?
     private var player: PlayerEntity?
-    private var spike: SpikeEntity?
-    private var fire: BossEntity?
-    private let contactService = CollisionService()
     private var platform: PlatformEntity?
     private var moviedCamera: CameraEntity?
+
+    private let contactService = CollisionService()
+
+    private var entityManager: EntityManager?
     private var platformManager: PlatformManager?
     private var coinManager: CoinManager?
+    private var spikeManager: SpikeManager?
+
     private var playerPosBeforeGenerate: CGFloat = 0
 
     //MARK: - Lifecycle
     
     override func didMove(to view: SKView) {
+        spikeManager = SpikeManager(scene: self, itemSize: Constants.spriteSize / 2)
         entityManager = EntityManager(scene: self)
         platformManager = PlatformManager(scene: self)
         coinManager = CoinManager(blockSize: Constants.spriteSize, scene: self)
@@ -91,6 +94,8 @@ extension GameScene {
             platformManager?.spawnPlatform()
             coinManager?.spawnCoins(on: platformManager?.platforms.last)
             coinManager?.removeUnusedCoin(at: currentPosition)
+            spikeManager?.spawnItem(at: platformManager?.platforms.last)
+            spikeManager?.removeUnusedItems(at: currentPosition)
             platformManager?.removeUnusedPlatform(currentPosition)
         }
     }
