@@ -22,6 +22,9 @@ final class CoinManager {
     private var coinSize: CGSize {
         blockSize / 2
     }
+    private var itemName: String? {
+        "Coin"
+    }
 
     //MARK: - Initializers
 
@@ -41,13 +44,14 @@ final class CoinManager {
             let index = CGFloat(index + 1)
             let coinPosition = CGPoint(x: platform.position.x + coinSize.width * index, y: spawnHeight)
             let coin = createCoin(coinPosition, coinSize)
+            createBodyCoin(for: coin)
             scene.addChild(coin)
             coinsInGame.append(coin)
         }
 
     }
 
-    func collectCoin(_ coin: SKNode) {
+    func collectCoin(_ coin: SKNode?) {
         collectedCoins += 1
         removeFromScene(coin)
     }
@@ -63,8 +67,8 @@ final class CoinManager {
 
     //MARK: - Private methods
 
-    private func removeFromScene(_ coin: SKNode) {
-        coin.removeFromParent()
+    private func removeFromScene(_ coin: SKNode?) {
+        coin?.removeFromParent()
     }
 
     private func createCoin(_ position: CGPoint, _ size: CGSize) -> SKSpriteNode {
@@ -74,7 +78,16 @@ final class CoinManager {
         coin.run(action)
         coin.position = position
         coin.size = size
+        coin.name = itemName
         return coin
+    }
+
+    private func createBodyCoin(for node: SKSpriteNode) {
+        let body = SKPhysicsBody(rectangleOf: node.size)
+        body.isDynamic = false
+        body.categoryBitMask = CollisionBitMask.enemyCategory
+        body.contactTestBitMask = CollisionBitMask.playerMask
+        node.physicsBody = body
     }
 
     private func coinsNumber(on platform: SKNode?) -> Int {

@@ -132,10 +132,13 @@ extension GameScene: SKPhysicsContactDelegate {
     func didBegin(_ contact: SKPhysicsContact) {
         let spikeName = spikeManager?.itemName ?? ""
         let playerName = player?.node.name ?? ""
-        if isSpike(contact, aName: playerName, bName: spikeName) {
+        let coinName = coinManager?.coinsInGame.first?.name ?? ""
+        if contactComprasion(contact, aName: playerName, bName: spikeName) {
             player?.death()
             cleanScene()
             runStartScreen(with: .restart)
+        } else if contactComprasion(contact, aName: playerName, bName: coinName) {
+            coinManager?.collectCoin(contact.bodyB.node)
         }
     }
     
@@ -143,7 +146,7 @@ extension GameScene: SKPhysicsContactDelegate {
         item?.name ?? ""
     }
     
-    private func isSpike(_ contact: SKPhysicsContact, aName: String, bName: String) -> Bool {
+    private func contactComprasion(_ contact: SKPhysicsContact, aName: String, bName: String) -> Bool {
         guard let aNodeName = contact.bodyA.node?.name,
             let bNodeName = contact.bodyB.node?.name else {
                 return false
