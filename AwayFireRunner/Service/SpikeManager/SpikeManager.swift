@@ -28,10 +28,29 @@ final class SpikeManager: ElementManager<SKSpriteNode> {
         item.physicsBody = body
     }
 
-    private func generateXPos(on paltform: SKNode?) -> CGFloat {
-        let width = paltform?.calculateAccumulatedFrame().width ?? 0
-        let min = width - width - itemSize.width
-        let max = width - itemSize.width
+    override func calculateItemLength(at platform: SKNode?) -> Int {
+        guard let platform = platform else {
+            return 0
+        }
+        switch platform.children.count {
+        case 0...3:
+            print(0)
+            return 0
+        case 4...7:
+            let a = Int.random(in: 0...1)
+            print(a)
+            return a
+        default:
+            return 0
+        }
+    }
+
+    //MARK: - Private methods
+
+    private func generateXPos(on platform: SKNode?) -> CGFloat {
+        let positionX = platform?.position.x ?? 0
+        let min = positionX + itemSize.width
+        let max = positionX - itemSize.width * 2 + (platform?.calculateAccumulatedFrame().width ?? 0)
         return CGFloat.random(in: min...max)
     }
 

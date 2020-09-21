@@ -35,7 +35,6 @@ final class PlayerEntity: GKEntity {
     //MARK: - Public methods
 
     func jump() {
-        print(Sizes.jumpStr)
         body.applyImpulse(.init(dx: 0, dy: Sizes.jumpStr))
     }
 

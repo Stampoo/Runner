@@ -28,7 +28,11 @@ class ElementManager<Element> where Element: SKNode {
 
     func spawnItem(at platform: SKNode?) {
         let itemCount = calculateItemLength(at: platform)
-        for index in 0...itemCount {
+        let correctItemCount = itemCount - 1 > -1 ? itemCount - 1 : 0
+        guard itemCount > 0 else {
+            return
+        }
+        for index in 0...correctItemCount {
             let item = createItem(with: platform, and: index)
             createBody(for: item)
             scene.addChild(item)

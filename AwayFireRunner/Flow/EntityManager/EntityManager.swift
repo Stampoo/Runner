@@ -60,7 +60,6 @@ final class EntityManager: NSObject {
                 spikeEntity?.node.removeFromParent()
                 self?.add(entity: spikeEntity)
                 self?.spikeIsSpawned = false
-                print("spawn")
             }
         })
     }
