@@ -33,26 +33,45 @@ final class GameScene: SKScene {
     private var spikeManager: SpikeManager?
 
     private var playerPosBeforeGenerate: CGFloat = 0
+    private var startScene: StartScene?
 
     //MARK: - Lifecycle
     
     override func didMove(to view: SKView) {
-        spikeManager = SpikeManager(scene: self, itemSize: Constants.spriteSize / 2)
-        entityManager = EntityManager(scene: self)
-        platformManager = PlatformManager(scene: self)
-        coinManager = CoinManager(blockSize: Constants.spriteSize, scene: self)
         physicsWorld.contactDelegate = self
-        setupFloor()
-        setupPlayer()
-        setupCamera()
-        platformManager?.spawnPlatform()
+        startNewGame()
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         player?.jump()
     }
 
+    //MARK: - Public methods
+
+    func startNewGame() {
+        startScene = nil
+        spikeManager = SpikeManager(scene: self, itemSize: Constants.spriteSize / 2)
+        entityManager = EntityManager(scene: self)
+        platformManager = PlatformManager(scene: self)
+        coinManager = CoinManager(blockSize: Constants.spriteSize, scene: self)
+        setupFloor()
+        setupPlayer()
+        setupCamera()
+        platformManager?.spawnPlatform()
+    }
+
     //MARK: - Private methods
+
+    private func cleanScene() {
+        entityManager?.removeAllEntities()
+        spikeManager = nil
+        entityManager = nil
+        platformManager = nil
+        coinManager = nil
+        floor = nil
+        player = nil
+        moviedCamera = nil
+    }
 
     private func setupFloor() {
         floor = FloorEntity(size: .init(width: Constants.screenSize.width,
@@ -69,6 +88,11 @@ final class GameScene: SKScene {
         moviedCamera = CameraEntity(position: Constants.screenSize.center)
         entityManager?.add(entity: moviedCamera)
         camera = moviedCamera?.node
+    }
+
+    private func runStartScreen(with type: StartType) {
+        startScene = StartScene(with: .restart, scene: self)
+        view?.presentScene(startScene ?? SKScene())
     }
     
 }
@@ -110,6 +134,7 @@ extension GameScene: SKPhysicsContactDelegate {
         let playerName = player?.node.name ?? ""
         if isSpike(contact, aName: playerName, bName: spikeName) {
             player?.death()
+            cleanScene()
             runStartScreen(with: .restart)
         }
     }

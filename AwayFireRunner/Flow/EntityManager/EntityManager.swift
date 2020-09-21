@@ -49,6 +49,12 @@ final class EntityManager: NSObject {
         entities.remove(entity)
     }
 
+    func removeAllEntities() {
+        for entity in entities {
+            remove(entity: entity)
+        }
+    }
+
     //MARK: - Private methods
 
     private func setupNotification() {
