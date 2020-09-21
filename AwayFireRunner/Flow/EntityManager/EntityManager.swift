@@ -39,15 +39,14 @@ final class EntityManager: NSObject {
     func entity<Element>(of type: Element.Type) -> Element? {
         entities.filter { $0 as? Element != nil }.first as? Element
     }
-
-    func spawnSpike() {
-        guard let spikeEntity = entity(of: SpikeEntity.self) else {
+    
+    func remove(entity: GKEntity?) {
+        guard let entity = entity,
+            let node = entity.component(ofType: NodeComponent.self)?.node else {
             return
         }
-        if spikeEntity.node.position.x < -spikeEntity.node.size.width {
-            spikeIsSpawned = true
-        }
-
+        node.removeFromParent()
+        entities.remove(entity)
     }
 
     //MARK: - Private methods

@@ -37,6 +37,9 @@
 		3440B85D25152582005C3287 /* PlatformEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3440B85C25152582005C3287 /* PlatformEntity.swift */; };
 		3440B85F25152590005C3287 /* BossEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3440B85E25152590005C3287 /* BossEntity.swift */; };
 		346363EB25166A3D00DC3B9D /* GKEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346363EA25166A3D00DC3B9D /* GKEntity.swift */; };
+		34AAAEC02519071B0015BF9E /* StartScreenEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AAAEBF2519071B0015BF9E /* StartScreenEntity.swift */; };
+		34AAAEC325191EB80015BF9E /* StartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AAAEC225191EB80015BF9E /* StartType.swift */; };
+		34AAAEC525191F090015BF9E /* StartScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AAAEC425191F090015BF9E /* StartScene.swift */; };
 		34DF666525178EE100E94FF4 /* SpawnPositionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF666425178EE100E94FF4 /* SpawnPositionCalculator.swift */; };
 		34DF666725178EF100E94FF4 /* PlatformManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF666625178EF100E94FF4 /* PlatformManager.swift */; };
 		34DF66692517948900E94FF4 /* PlatfromNodeBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF66682517948900E94FF4 /* PlatfromNodeBuilder.swift */; };
@@ -75,6 +78,9 @@
 		3440B85C25152582005C3287 /* PlatformEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformEntity.swift; sourceTree = "<group>"; };
 		3440B85E25152590005C3287 /* BossEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BossEntity.swift; sourceTree = "<group>"; };
 		346363EA25166A3D00DC3B9D /* GKEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKEntity.swift; sourceTree = "<group>"; };
+		34AAAEBF2519071B0015BF9E /* StartScreenEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScreenEntity.swift; sourceTree = "<group>"; };
+		34AAAEC225191EB80015BF9E /* StartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartType.swift; sourceTree = "<group>"; };
+		34AAAEC425191F090015BF9E /* StartScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartScene.swift; sourceTree = "<group>"; };
 		34DF666425178EE100E94FF4 /* SpawnPositionCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnPositionCalculator.swift; sourceTree = "<group>"; };
 		34DF666625178EF100E94FF4 /* PlatformManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformManager.swift; sourceTree = "<group>"; };
 		34DF66682517948900E94FF4 /* PlatfromNodeBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatfromNodeBuilder.swift; sourceTree = "<group>"; };
@@ -161,6 +167,7 @@
 				342EEE3725163F50007DC4B9 /* Service */,
 				3427E60325137D9E0031528D /* Flow */,
 				3427E5ED251376160031528D /* GameScene.swift */,
+				34AAAEC125191E5B0015BF9E /* StartScene */,
 				3427E5E9251376160031528D /* GameScene.sks */,
 				3427E5EB251376160031528D /* Actions.sks */,
 				3427E602251379080031528D /* Application */,
@@ -217,6 +224,7 @@
 				3423A7A22514AC9F00304551 /* PlayerEntity.swift */,
 				3423A7A42514C65500304551 /* SpikeEntity.swift */,
 				341C45392517617F006AD06E /* CameraEntity.swift */,
+				34AAAEBF2519071B0015BF9E /* StartScreenEntity.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -266,6 +274,15 @@
 				343B7E882517D68D00C01A37 /* CoinManager.swift */,
 			);
 			path = CoinService;
+			sourceTree = "<group>";
+		};
+		34AAAEC125191E5B0015BF9E /* StartScene */ = {
+			isa = PBXGroup;
+			children = (
+				34AAAEC225191EB80015BF9E /* StartType.swift */,
+				34AAAEC425191F090015BF9E /* StartScene.swift */,
+			);
+			path = StartScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -347,12 +364,15 @@
 				3427E5EE251376160031528D /* GameScene.swift in Sources */,
 				341A40832513AFA40074C3CC /* EntityManager.swift in Sources */,
 				342506742517F04D005D868A /* SpikeManager.swift in Sources */,
+				34AAAEC02519071B0015BF9E /* StartScreenEntity.swift in Sources */,
 				3427E60C25137FFC0031528D /* FloorEntity.swift in Sources */,
 				3427E60A25137DCF0031528D /* BodyComponent.swift in Sources */,
 				342506772517FAF6005D868A /* ElementProduction.swift in Sources */,
 				3427E5F0251376160031528D /* StartPointController.swift in Sources */,
+				34AAAEC325191EB80015BF9E /* StartType.swift in Sources */,
 				3440B85D25152582005C3287 /* PlatformEntity.swift in Sources */,
 				3440B85F25152590005C3287 /* BossEntity.swift in Sources */,
+				34AAAEC525191F090015BF9E /* StartScene.swift in Sources */,
 				341C453A2517617F006AD06E /* CameraEntity.swift in Sources */,
 				3423A7A12514AAA600304551 /* NSObject.swift in Sources */,
 				346363EB25166A3D00DC3B9D /* GKEntity.swift in Sources */,

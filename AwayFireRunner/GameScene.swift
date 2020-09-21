@@ -106,6 +106,25 @@ extension GameScene {
 extension GameScene: SKPhysicsContactDelegate {
 
     func didBegin(_ contact: SKPhysicsContact) {
+        let spikeName = spikeManager?.itemName ?? ""
+        let playerName = player?.node.name ?? ""
+        if isSpike(contact, aName: playerName, bName: spikeName) {
+            player?.death()
+            runStartScreen(with: .restart)
+        }
+    }
+    
+    private func nameItem(from item: SKNode?) -> String {
+        item?.name ?? ""
+    }
+    
+    private func isSpike(_ contact: SKPhysicsContact, aName: String, bName: String) -> Bool {
+        guard let aNodeName = contact.bodyA.node?.name,
+            let bNodeName = contact.bodyB.node?.name else {
+                return false
+        }
+        print(aNodeName, aName, bNodeName, bName)
+        return aNodeName == aName && bNodeName == bName
     }
 
 }

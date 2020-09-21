@@ -9,6 +9,14 @@
 import SpriteKit
 
 final class SpikeManager: ElementManager<SKSpriteNode> {
+    
+    //MARK: - Public properties
+    
+    override var itemName: String? {
+        "Spike"
+    }
+    
+    //MARK: - Public methods
 
     override func createItem(with platform: SKNode?, and index: Int) -> SKSpriteNode {
         guard let platform = platform else {
@@ -24,6 +32,8 @@ final class SpikeManager: ElementManager<SKSpriteNode> {
 
     override func createBody(for item: SKSpriteNode) {
         let body = SKPhysicsBody(rectangleOf: item.size)
+        body.categoryBitMask = CollisionBitMask.floorCategory
+        body.contactTestBitMask = CollisionBitMask.playerMask
         body.isDynamic = false
         item.physicsBody = body
     }
@@ -37,9 +47,7 @@ final class SpikeManager: ElementManager<SKSpriteNode> {
             print(0)
             return 0
         case 4...7:
-            let a = Int.random(in: 0...1)
-            print(a)
-            return a
+            return Int.random(in: 0...1)
         default:
             return 0
         }

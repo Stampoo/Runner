@@ -16,6 +16,9 @@ class ElementManager<Element> where Element: SKNode {
     private(set) var items = [Element]()
     let itemSize: CGSize
     let scene: SKScene
+    var itemName: String? {
+        "item"
+    }
 
     //MARK: - Initializers
 
@@ -34,6 +37,7 @@ class ElementManager<Element> where Element: SKNode {
         }
         for index in 0...correctItemCount {
             let item = createItem(with: platform, and: index)
+            item.name = itemName
             createBody(for: item)
             scene.addChild(item)
         }
