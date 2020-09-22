@@ -32,15 +32,20 @@ final class PlatformManager {
 
     //MARK: - Public methods
 
+    func spawnFirstPlatform() {
+
+    }
+
     func spawnPlatform() {
         let altNode = SKNode()
-        altNode.position = .zero
+        altNode.position = .init(x: 0, y: UIScreen.main.bounds.height * 0.4)
         let oldPlatform = platforms.last ?? altNode
-        let length = platforms.last != nil ? randomLength() : 7
+        let length = platforms.last != nil ? randomLength() : 12
         let position = spawnService.calculate(oldPosition: oldPlatform.position,
                                               oldPlatformSize: oldPlatform.calculateAccumulatedFrame().size,
                                               newPlatformWidth: lengthToWidth(length))
         let platform = nodeBuilder.create(length: length, position: position)
+        platform.name = "Platform"
         scene.addChild(platform)
         platforms.append(platform)
     }
@@ -49,10 +54,15 @@ final class PlatformManager {
         guard let position = cameraPosition else {
             return
         }
-        let bounds = position.x - UIScreen.main.bounds.width
+        let bounds = position.x - UIScreen.main.bounds.width * 2
         let platformToremove = platforms.filter { $0.position.x < bounds }
         platformToremove.forEach { $0.removeFromParent() }
         platforms = platforms.filter { $0.position.x > bounds }
+    }
+
+    func removeAll() {
+        platforms.forEach { $0.removeFromParent() }
+        platforms = []
     }
 
     //MARK: - Private methods

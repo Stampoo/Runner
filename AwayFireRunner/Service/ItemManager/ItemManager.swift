@@ -62,6 +62,11 @@ class ElementManager<Element> where Element: SKNode {
         items = items.filter { $0.position.x > camPos.x - bound}
     }
 
+    func removeAll() {
+        items.forEach { $0.removeFromParent() }
+        items = []
+    }
+
     func calculateItemLength(at platform: SKNode?) -> Int {
         let platformParts = platform?.children.count ?? 0
         return Array(0...platformParts).randomElement() ?? 0

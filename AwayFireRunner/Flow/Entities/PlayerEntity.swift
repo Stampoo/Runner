@@ -23,6 +23,7 @@ final class PlayerEntity: GKEntity {
     let node: SKSpriteNode
     let body: SKPhysicsBody
     private(set) var nodeSpeed: CGFloat = 3
+    private(set) var isJumping = false
 
     //MARK: - Initializers
 
@@ -47,6 +48,11 @@ final class PlayerEntity: GKEntity {
         let jumpTexture = Array(0...3).map { SKTexture(imageNamed: "PlayerJump\($0)") }
         node.run(.animate(with: jumpTexture, timePerFrame: 0.2), withKey: Constants.jumpKey)
         body.applyImpulse(.init(dx: 0, dy: Sizes.jumpStr))
+        isJumping = true
+    }
+
+    func setJumpingState() {
+        isJumping = false
     }
 
     func startMove() {
@@ -71,7 +77,7 @@ final class PlayerEntity: GKEntity {
         let nodeComponent = NodeComponent(node: node)
         addComponent(nodeComponent)
         let screenSize = UIScreen.main.bounds.size
-        node.position = .init(x: screenSize.width / 2, y: screenSize.height / 2)
+        node.position = .init(x: screenSize.width / 2, y: screenSize.height * 0.6)
         node.name = "Player"
         node.physicsBody = body
     }
@@ -83,8 +89,8 @@ final class PlayerEntity: GKEntity {
         body.friction = 0
         body.isDynamic = true
         body.categoryBitMask = CollisionBitMask.playerMask
-        body.collisionBitMask = CollisionBitMask.floorCategory
-        body.contactTestBitMask = CollisionBitMask.floorCategory
+        body.collisionBitMask = CollisionBitMask.floorCategory | CollisionBitMask.platformCategory
+        body.contactTestBitMask = CollisionBitMask.floorCategory | CollisionBitMask.coinCategory | CollisionBitMask.spikeCategory | CollisionBitMask.platformCategory
     }
 
     private func runPlayer() {

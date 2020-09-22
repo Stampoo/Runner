@@ -21,6 +21,7 @@ final class GameScene: SKScene {
     //MARK: - Public properties
 
     weak var sceneDelegate: GameSceneDelegate?
+    private(set) var coinManager: CoinManager?
 
     //MARK: - Private properties
 
@@ -29,15 +30,11 @@ final class GameScene: SKScene {
     private var platform: PlatformEntity?
     private var moviedCamera: CameraEntity?
 
-    private let contactService = CollisionService()
+    private var contactService: CollisionService?
 
     private var entityManager: EntityManager?
     private var platformManager: PlatformManager?
-    private var coinManager: CoinManager?
     private var spikeManager: SpikeManager?
-
-    private var playerPosBeforeGenerate: CGFloat = 0
-    private var startScene: StartScene?
 
     //MARK: - Lifecycle
     
@@ -47,12 +44,16 @@ final class GameScene: SKScene {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        player?.jump()
+        if let state = player?.isJumping,
+           state == false {
+            player?.jump()
+        }
     }
 
     //MARK: - Public methods
 
     func startNewGame() {
+        contactService = CollisionService(scene: self)
         spikeManager = SpikeManager(scene: self, itemSize: Constants.spriteSize / 2)
         entityManager = EntityManager(scene: self)
         platformManager = PlatformManager(scene: self)
@@ -61,13 +62,25 @@ final class GameScene: SKScene {
         setupPlayer()
         setupCamera()
         platformManager?.spawnPlatform()
-        print("lel")
+    }
+
+    func endGame() {
+        player?.death()
+        cleanScene()
+        sceneDelegate?.gameDidFinishing()
+    }
+
+    func setJumpingState() {
+        player?.setJumpingState()
     }
 
     //MARK: - Private methods
 
     private func cleanScene() {
         entityManager?.removeAllEntities()
+        spikeManager?.removeAll()
+        platformManager?.removeAll()
+        coinManager?.removeAll()
         spikeManager = nil
         entityManager = nil
         platformManager = nil
@@ -75,6 +88,7 @@ final class GameScene: SKScene {
         floor = nil
         player = nil
         moviedCamera = nil
+        removeAllChildren()
     }
 
     private func setupFloor() {
@@ -94,11 +108,6 @@ final class GameScene: SKScene {
         camera = moviedCamera?.node
     }
 
-    private func runStartScreen(with type: StartType) {
-        startScene = StartScene(with: .restart, scene: self)
-        view?.presentScene(startScene ?? SKScene())
-    }
-    
 }
 
 
@@ -130,33 +139,13 @@ extension GameScene {
 
 }
 
-
 extension GameScene: SKPhysicsContactDelegate {
 
     func didBegin(_ contact: SKPhysicsContact) {
-        let spikeName = spikeManager?.itemName ?? ""
-        let playerName = player?.node.name ?? ""
-        let coinName = coinManager?.coinsInGame.first?.name ?? ""
-        if contactComprasion(contact, aName: playerName, bName: spikeName) {
-            player?.death()
-            cleanScene()
-            sceneDelegate?.gameDidFinishing()
-        } else if contactComprasion(contact, aName: playerName, bName: coinName) {
-            coinManager?.collectCoin(contact.bodyB.node)
-        }
-    }
-    
-    private func nameItem(from item: SKNode?) -> String {
-        item?.name ?? ""
-    }
-    
-    private func contactComprasion(_ contact: SKPhysicsContact, aName: String, bName: String) -> Bool {
-        guard let aNodeName = contact.bodyA.node?.name,
-            let bNodeName = contact.bodyB.node?.name else {
-                return false
-        }
-        print(aNodeName, aName, bNodeName, bName)
-        return aNodeName == aName && bNodeName == bName
+        contactService?.playerWithSpike(contact)
+        contactService?.playerWithCoin(contact)
+        contactService?.playerWithFloor(contact)
+        contactService?.playerWithPlatform(contact)
     }
 
 }

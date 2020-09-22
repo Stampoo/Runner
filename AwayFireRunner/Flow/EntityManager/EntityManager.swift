@@ -22,7 +22,6 @@ final class EntityManager: NSObject {
     init(scene: SKScene) {
         self.scene = scene
         super.init()
-        setupNotification()
     }
 
     //MARK: - Public methods
@@ -53,20 +52,6 @@ final class EntityManager: NSObject {
         for entity in entities {
             remove(entity: entity)
         }
-    }
-
-    //MARK: - Private methods
-
-    private func setupNotification() {
-        observer = observe(\.spikeIsSpawned, changeHandler: { [weak self] (manager, value) in
-            if manager.spikeIsSpawned {
-                let spikeEntity = self?.entity(of: SpikeEntity.self)
-                spikeEntity?.spawnNode()
-                spikeEntity?.node.removeFromParent()
-                self?.add(entity: spikeEntity)
-                self?.spikeIsSpawned = false
-            }
-        })
     }
 
 }

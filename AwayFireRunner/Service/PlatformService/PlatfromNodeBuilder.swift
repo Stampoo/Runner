@@ -45,6 +45,7 @@ final class PlatformNodeBuilder {
                 createNode(with: middlePlatform, putTo: container, index: index)
             }
         }
+        container.name = "Platform"
         container.position = position
         return container
     }
@@ -62,6 +63,7 @@ final class PlatformNodeBuilder {
         let bodySize = CGSize(width: bodyLength, height: nodeSize.height)
         let center = CGPoint(x: nodeSize.width / 2 * CGFloat(length) - nodeSize.width / 2, y: 0)
         let body = SKPhysicsBody(rectangleOf: bodySize, center: center)
+        body.categoryBitMask = CollisionBitMask.platformCategory
         body.isDynamic = false
         body.restitution = 0
         node.physicsBody = body

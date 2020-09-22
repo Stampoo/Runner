@@ -39,7 +39,7 @@ final class StartPointController: UIViewController {
 
     //MARK: - Private methods
 
-    private func setupScene() {
+    func setupScene() {
         guard let view = view as? SKView else {
             fatalError("could't cast to SKView")
         }
@@ -60,6 +60,8 @@ extension StartPointController: GameSceneDelegate {
 
     func gameDidFinishing() {
         let start = StartViewController()
+        let lview = view as? SKView
+        lview?.presentScene(nil)
         start.parentVc = self
         present(start, animated: true, completion: nil)
     }

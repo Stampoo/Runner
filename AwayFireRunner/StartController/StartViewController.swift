@@ -43,9 +43,8 @@ final class StartViewController: UIViewController {
     }
 
     @objc private func startButtonDidPressed(sender: UIButton) {
-        parentVc?.scene.startNewGame()
+        parentVc?.setupScene()
         dismiss(animated: true, completion: nil)
-
     }
 
 }

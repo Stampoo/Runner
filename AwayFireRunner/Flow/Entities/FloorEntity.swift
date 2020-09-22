@@ -43,6 +43,7 @@ final class FloorEntity: GKEntity {
     private func setupNode(with size: CGSize) {
         let nodeComponent = NodeComponent(node: node)
         addComponent(nodeComponent)
+        node.name = "Floor"
         node.physicsBody = body
         node.position = .init(x: node.size.width / 2,
                               y: node.size.height / 2)

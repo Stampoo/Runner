@@ -32,7 +32,7 @@ final class SpikeManager: ElementManager<SKSpriteNode> {
 
     override func createBody(for item: SKSpriteNode) {
         let body = SKPhysicsBody(rectangleOf: item.size)
-        body.categoryBitMask = CollisionBitMask.floorCategory
+        body.categoryBitMask = CollisionBitMask.spikeCategory
         body.contactTestBitMask = CollisionBitMask.playerMask
         body.isDynamic = false
         item.physicsBody = body
@@ -44,7 +44,6 @@ final class SpikeManager: ElementManager<SKSpriteNode> {
         }
         switch platform.children.count {
         case 0...3:
-            print(0)
             return 0
         case 4...7:
             return Int.random(in: 0...1)

@@ -65,6 +65,11 @@ final class CoinManager {
         coinsInGame = coinsInGame.filter { $0.position.x > camPos.x - UIScreen.main.bounds.size.width }
     }
 
+    func removeAll() {
+        coinsInGame.forEach { $0.removeFromParent() }
+        coinsInGame = []
+    }
+
     //MARK: - Private methods
 
     private func removeFromScene(_ coin: SKNode?) {
@@ -85,7 +90,7 @@ final class CoinManager {
     private func createBodyCoin(for node: SKSpriteNode) {
         let body = SKPhysicsBody(rectangleOf: node.size)
         body.isDynamic = false
-        body.categoryBitMask = CollisionBitMask.enemyCategory
+        body.categoryBitMask = CollisionBitMask.coinCategory
         body.contactTestBitMask = CollisionBitMask.playerMask
         node.physicsBody = body
     }

@@ -46,7 +46,7 @@ final class PlatformEntity: GKEntity {
 
     private func setupBody() {
         body.isDynamic = false
-        body.categoryBitMask = CollisionBitMask.floorCategory
+        body.categoryBitMask = CollisionBitMask.platformCategory
         body.collisionBitMask = CollisionBitMask.playerMask
     }
     
