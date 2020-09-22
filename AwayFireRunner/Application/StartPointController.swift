@@ -24,6 +24,8 @@ final class StartPointController: UIViewController {
         true
     }
 
+    let scene = GameScene()
+
     //MARK: - Lifecycle
 
     override func loadView() {
@@ -41,13 +43,25 @@ final class StartPointController: UIViewController {
         guard let view = view as? SKView else {
             fatalError("could't cast to SKView")
         }
-        let scene = GameScene()
+        scene.sceneDelegate = self
         scene.scaleMode = .resizeFill
         view.ignoresSiblingOrder = true
         view.showsFPS = true
         view.showsNodeCount = true
         view.showsPhysics = true
         view.presentScene(scene)
+    }
+
+}
+
+//MARK: - Extensions
+
+extension StartPointController: GameSceneDelegate {
+
+    func gameDidFinishing() {
+        let start = StartViewController()
+        start.parentVc = self
+        present(start, animated: true, completion: nil)
     }
 
 }

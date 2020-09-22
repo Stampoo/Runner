@@ -18,6 +18,10 @@ final class GameScene: SKScene {
         static let spriteSize = CGSize(width: Constants.spriteSide, height: Constants.spriteSide)
     }
 
+    //MARK: - Public properties
+
+    weak var sceneDelegate: GameSceneDelegate?
+
     //MARK: - Private properties
 
     private var floor: FloorEntity?
@@ -49,7 +53,6 @@ final class GameScene: SKScene {
     //MARK: - Public methods
 
     func startNewGame() {
-        startScene = nil
         spikeManager = SpikeManager(scene: self, itemSize: Constants.spriteSize / 2)
         entityManager = EntityManager(scene: self)
         platformManager = PlatformManager(scene: self)
@@ -58,6 +61,7 @@ final class GameScene: SKScene {
         setupPlayer()
         setupCamera()
         platformManager?.spawnPlatform()
+        print("lel")
     }
 
     //MARK: - Private methods
@@ -136,7 +140,7 @@ extension GameScene: SKPhysicsContactDelegate {
         if contactComprasion(contact, aName: playerName, bName: spikeName) {
             player?.death()
             cleanScene()
-            runStartScreen(with: .restart)
+            sceneDelegate?.gameDidFinishing()
         } else if contactComprasion(contact, aName: playerName, bName: coinName) {
             coinManager?.collectCoin(contact.bodyB.node)
         }
