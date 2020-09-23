@@ -54,6 +54,7 @@ final class PlatformNodeBuilder {
         let index = CGFloat(index - 1)
         let newNode = SKSpriteNode(texture: texture)
         newNode.size = nodeSize
+        newNode.zPosition = 2
         node.addChild(newNode)
         newNode.position = .init(x: index * nodeSize.width, y: 0)
     }

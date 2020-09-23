@@ -79,6 +79,7 @@ final class PlayerEntity: GKEntity {
         let screenSize = UIScreen.main.bounds.size
         node.position = .init(x: screenSize.width / 2, y: screenSize.height * 0.6)
         node.name = "Player"
+        node.zPosition = 2
         node.physicsBody = body
     }
 

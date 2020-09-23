@@ -24,9 +24,10 @@ final class SpikeManager: ElementManager<SKSpriteNode> {
         }
         let node = SKSpriteNode(texture: .init(imageNamed: "Spike"))
         let randomX = generateXPos(on: platform)
-        let y = platform.position.y + platform.calculateAccumulatedFrame().height / 2 + itemSize.height / 2
+        let y = platform.position.y + platform.calculateAccumulatedFrame().height / 2
         let position = CGPoint(x: randomX, y: y)
         node.position = position
+        node.zPosition = 3
         return node
     }
 

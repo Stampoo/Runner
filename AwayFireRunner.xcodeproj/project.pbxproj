@@ -33,7 +33,6 @@
 		342EEE3925163F83007DC4B9 /* CollisionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EEE3825163F83007DC4B9 /* CollisionService.swift */; };
 		342EEE3C25163FF7007DC4B9 /* CollisionBitMask.swift in Sources */ = {isa = PBXBuildFile; fileRef = 342EEE3B25163FF7007DC4B9 /* CollisionBitMask.swift */; };
 		343B7E892517D68D00C01A37 /* CoinManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 343B7E882517D68D00C01A37 /* CoinManager.swift */; };
-		3440B85D25152582005C3287 /* PlatformEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3440B85C25152582005C3287 /* PlatformEntity.swift */; };
 		34427CE3251A409A005803A0 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34427CE2251A409A005803A0 /* StartViewController.swift */; };
 		34427CE8251A4234005803A0 /* GameSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34427CE7251A4234005803A0 /* GameSceneDelegate.swift */; };
 		34427CF2251A91ED005803A0 /* BackgroundEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34427CF1251A91ED005803A0 /* BackgroundEntity.swift */; };
@@ -73,7 +72,6 @@
 		342EEE3825163F83007DC4B9 /* CollisionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionService.swift; sourceTree = "<group>"; };
 		342EEE3B25163FF7007DC4B9 /* CollisionBitMask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollisionBitMask.swift; sourceTree = "<group>"; };
 		343B7E882517D68D00C01A37 /* CoinManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinManager.swift; sourceTree = "<group>"; };
-		3440B85C25152582005C3287 /* PlatformEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformEntity.swift; sourceTree = "<group>"; };
 		34427CE2251A409A005803A0 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		34427CE7251A4234005803A0 /* GameSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneDelegate.swift; sourceTree = "<group>"; };
 		34427CF1251A91ED005803A0 /* BackgroundEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundEntity.swift; sourceTree = "<group>"; };
@@ -216,7 +214,6 @@
 			children = (
 				3427E60B25137FFC0031528D /* FloorEntity.swift */,
 				34427CF1251A91ED005803A0 /* BackgroundEntity.swift */,
-				3440B85C25152582005C3287 /* PlatformEntity.swift */,
 				3423A7A22514AC9F00304551 /* PlayerEntity.swift */,
 				341C45392517617F006AD06E /* CameraEntity.swift */,
 			);
@@ -375,7 +372,6 @@
 				342506772517FAF6005D868A /* ElementProduction.swift in Sources */,
 				3427E5F0251376160031528D /* StartPointController.swift in Sources */,
 				34AAAEC325191EB80015BF9E /* StartType.swift in Sources */,
-				3440B85D25152582005C3287 /* PlatformEntity.swift in Sources */,
 				34427CE8251A4234005803A0 /* GameSceneDelegate.swift in Sources */,
 				341C453A2517617F006AD06E /* CameraEntity.swift in Sources */,
 				3423A7A12514AAA600304551 /* NSObject.swift in Sources */,

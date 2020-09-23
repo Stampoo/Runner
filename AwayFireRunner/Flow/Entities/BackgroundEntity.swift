@@ -49,6 +49,7 @@ final class BackgroundEntity: GKEntity {
                                   y: Sizes.screenSize.midY)
             node.addChild(nodePart)
         }
+        node.zPosition = 0
         node.position = .zero
         addNodeComponent(node)
     }

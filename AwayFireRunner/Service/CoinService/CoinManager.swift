@@ -13,7 +13,12 @@ final class CoinManager {
     //MARK: - Public properties
 
     private(set) var coinsInGame = [SKSpriteNode]()
-    private(set) var collectedCoins = 0
+    private(set) var collectedCoins = 0 {
+        willSet {
+            let gameScene = scene as? GameScene
+            gameScene?.scoreLabel.text = "Score: \(newValue)"
+        }
+    }
 
     //MARK: - Private properties
 
@@ -82,6 +87,7 @@ final class CoinManager {
         let coin = SKSpriteNode(texture: coinTextures.first)
         coin.run(action)
         coin.position = position
+        coin.zPosition = 2
         coin.size = size
         coin.name = itemName
         return coin

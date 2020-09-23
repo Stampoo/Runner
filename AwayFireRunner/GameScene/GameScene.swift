@@ -22,12 +22,12 @@ final class GameScene: SKScene {
 
     weak var sceneDelegate: GameSceneDelegate?
     private(set) var coinManager: CoinManager?
+    private(set) var scoreLabel = SKLabelNode(text: "Score: 0")
 
     //MARK: - Private properties
 
     private var floor: FloorEntity?
     private var player: PlayerEntity?
-    private var platform: PlatformEntity?
     private var moviedCamera: CameraEntity?
     private var background: BackgroundEntity?
 
@@ -41,6 +41,7 @@ final class GameScene: SKScene {
     
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
+        setupScore()
         startNewGame()
         background = BackgroundEntity(size: Sizes.screenSize)
         entityManager?.add(entity: background)
@@ -71,6 +72,7 @@ final class GameScene: SKScene {
         player?.death()
         cleanScene()
         sceneDelegate?.gameDidFinishing()
+        scoreLabel.text = "Score: 0"
     }
 
     func setJumpingState() {
@@ -111,6 +113,12 @@ final class GameScene: SKScene {
         camera = moviedCamera?.node
     }
 
+    private func setupScore() {
+        scoreLabel.position = .init(x: Sizes.screenWidth * 0.2, y: Sizes.sceenHeight * 0.8)
+        scoreLabel.zPosition = 3
+        addChild(scoreLabel)
+    }
+
 }
 
 
@@ -122,6 +130,7 @@ extension GameScene {
         background?.startMove(with: player?.node.position)
         player?.startMove()
         moviedCamera?.moveCamera(on: player?.getCurrentPos().x)
+        setScorePos(at: player?.getCurrentPos())
         floor?.pin(to: player?.getCurrentPos().x ?? 0)
         platformGeneratorTrigger()
     }
@@ -139,6 +148,12 @@ extension GameScene {
             spikeManager?.removeUnusedItems(at: currentPosition)
             platformManager?.removeUnusedPlatform(currentPosition)
         }
+    }
+
+    private func setScorePos(at cameraPos: CGPoint?) {
+        let x = cameraPos?.x ?? 0
+        let range = Sizes.screenSize.midX - Sizes.screenWidth * 0.2
+        scoreLabel.position.x = x - range
     }
 
 }
