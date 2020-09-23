@@ -18,9 +18,7 @@ final class FloorEntity: GKEntity {
     //MARK: - Initializers
 
     init(size: CGSize) {
-        let texture = SKTexture(imageNamed: "platform")
-        node = SKSpriteNode(texture: texture)
-        node.size = size
+        node = SKSpriteNode(color: .clear, size: size)
         body = SKPhysicsBody(rectangleOf: size)
         super.init()
         setupNode(with: size)

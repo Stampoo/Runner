@@ -29,6 +29,7 @@ final class GameScene: SKScene {
     private var player: PlayerEntity?
     private var platform: PlatformEntity?
     private var moviedCamera: CameraEntity?
+    private var background: BackgroundEntity?
 
     private var contactService: CollisionService?
 
@@ -41,6 +42,8 @@ final class GameScene: SKScene {
     override func didMove(to view: SKView) {
         physicsWorld.contactDelegate = self
         startNewGame()
+        background = BackgroundEntity(size: Sizes.screenSize)
+        entityManager?.add(entity: background)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -116,6 +119,7 @@ final class GameScene: SKScene {
 extension GameScene {
 
     override func update(_ currentTime: TimeInterval) {
+        background?.startMove(with: player?.node.position)
         player?.startMove()
         moviedCamera?.moveCamera(on: player?.getCurrentPos().x)
         floor?.pin(to: player?.getCurrentPos().x ?? 0)

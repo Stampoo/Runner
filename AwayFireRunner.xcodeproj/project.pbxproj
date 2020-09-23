@@ -36,6 +36,7 @@
 		3440B85D25152582005C3287 /* PlatformEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3440B85C25152582005C3287 /* PlatformEntity.swift */; };
 		34427CE3251A409A005803A0 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34427CE2251A409A005803A0 /* StartViewController.swift */; };
 		34427CE8251A4234005803A0 /* GameSceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34427CE7251A4234005803A0 /* GameSceneDelegate.swift */; };
+		34427CF2251A91ED005803A0 /* BackgroundEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34427CF1251A91ED005803A0 /* BackgroundEntity.swift */; };
 		346363EB25166A3D00DC3B9D /* GKEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 346363EA25166A3D00DC3B9D /* GKEntity.swift */; };
 		34AAAEC325191EB80015BF9E /* StartType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34AAAEC225191EB80015BF9E /* StartType.swift */; };
 		34DF666525178EE100E94FF4 /* SpawnPositionCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34DF666425178EE100E94FF4 /* SpawnPositionCalculator.swift */; };
@@ -75,6 +76,7 @@
 		3440B85C25152582005C3287 /* PlatformEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformEntity.swift; sourceTree = "<group>"; };
 		34427CE2251A409A005803A0 /* StartViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartViewController.swift; sourceTree = "<group>"; };
 		34427CE7251A4234005803A0 /* GameSceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameSceneDelegate.swift; sourceTree = "<group>"; };
+		34427CF1251A91ED005803A0 /* BackgroundEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundEntity.swift; sourceTree = "<group>"; };
 		346363EA25166A3D00DC3B9D /* GKEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GKEntity.swift; sourceTree = "<group>"; };
 		34AAAEC225191EB80015BF9E /* StartType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartType.swift; sourceTree = "<group>"; };
 		34DF666425178EE100E94FF4 /* SpawnPositionCalculator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpawnPositionCalculator.swift; sourceTree = "<group>"; };
@@ -213,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				3427E60B25137FFC0031528D /* FloorEntity.swift */,
+				34427CF1251A91ED005803A0 /* BackgroundEntity.swift */,
 				3440B85C25152582005C3287 /* PlatformEntity.swift */,
 				3423A7A22514AC9F00304551 /* PlayerEntity.swift */,
 				341C45392517617F006AD06E /* CameraEntity.swift */,
@@ -368,6 +371,7 @@
 				342506742517F04D005D868A /* SpikeManager.swift in Sources */,
 				3427E60C25137FFC0031528D /* FloorEntity.swift in Sources */,
 				3427E60A25137DCF0031528D /* BodyComponent.swift in Sources */,
+				34427CF2251A91ED005803A0 /* BackgroundEntity.swift in Sources */,
 				342506772517FAF6005D868A /* ElementProduction.swift in Sources */,
 				3427E5F0251376160031528D /* StartPointController.swift in Sources */,
 				34AAAEC325191EB80015BF9E /* StartType.swift in Sources */,
